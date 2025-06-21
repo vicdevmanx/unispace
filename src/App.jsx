@@ -2,9 +2,9 @@ import About from './components/About';
 import { ContactUs } from './components/ContactUs';
 import FAQ from './components/Faq';
 import Footer from './components/Footer';
-import Hero from './components/Hero';
 import HeroSection from './components/HeroSection';
 import Navbar from './components/Navbar';
+import Services from './components/services';
 import './index.css';
 
 function App() {
@@ -18,11 +18,15 @@ function App() {
         <About />
       </section>
 
+      <section id='service'>
+        <Services />
+      </section>
+
       <section id='faq'>
         <FAQ />
       </section>
 
-      <section id='contact'>
+      <section id='contac'>
         <ContactUs />
       </section>
 

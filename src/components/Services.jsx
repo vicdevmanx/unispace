@@ -41,10 +41,10 @@ const Services = () => {
             <section className="py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="font-600 text-[2rem] md:text-4xl font-bold text-neutral-900 mb-4">
+                        <h2 className="text-4xl font-bold mb-4 font-600 text-[2rem] md:text-4xl text-[#1D3A8A]">
                             Our Services
                         </h2>
-                        <p className="text-[1rem] text-neutral-700 max-w-2xl mx-auto">
+                        <p className="text-lg max-w-2xl mx-auto text-[1rem] text-neutral-700">
                             From concept to deployment, we offer comprehensive solutions tailored to your unique business needs.
                         </p>
                     </div>
@@ -53,7 +53,7 @@ const Services = () => {
                         {services.map((service, index) => (
                             <div
                                 key={index}
-                                className="bg-white/95 backdrop-blur-sm shadow-lg rounded-xl p-6 hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-[#1D3A8A]/20"
+                                className="bg-white/95 backdrop-blur-sm  rounded-xl p-6 hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-[#1D3A8A]/20"
                             >
                                 <div className="flex items-center mb-4">
                                     <div className="bg-[#1D3A8A] bg-opacity-10 p-3 rounded-lg mr-4">
@@ -93,7 +93,7 @@ const Services = () => {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <button className="whitespace-nowrap bg-white text-[#1D3A8A] stroke-[#1D3A8A] px-8 py-3 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-medium flex items-center justify-center">
-                            <Headphones className="h-5 w-5 mr-2" />
+                            <a href='/register' className="h-5 w-5 mr-2" />
                             Join UniSpace
                         </button>
                     </div>

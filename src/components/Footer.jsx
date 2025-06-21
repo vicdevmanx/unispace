@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } 
 
 const Footer = () => {
   return (
-    <div className="bg-gradient-to-t from-[#1D3A8A] to-[#1D3A8A]">
+    <div className="bg-gradient-to-t from-[#1D3A8A] to-[#214cc3] rounded-t-[45px] md:rounded-t-[65px] lg:rounded-t-[95px]">
       <footer className=" text-[#F3F4F6] pt-12 pb-6 px-4 mt-12">
         <div className="max-w-7xl  mx-auto justify-center grid grid-cols-1 md:grid-cols-4 gap-10 pb-8">
           {/* Brand & Social */}
