@@ -1,4 +1,4 @@
-import { Code2, Palette, Smartphone, Globe, Zap, Shield, Users, Headphones, CalendarClock, Trophy, RefreshCcw, List } from 'lucide-react';
+import { SatelliteDish, Users, Headphones, CalendarClock, Trophy, RefreshCcw, List } from 'lucide-react';
 
 const Services = () => {
     const services = [
@@ -10,6 +10,16 @@ const Services = () => {
                 "Live seat and room status",
                 "Tracks usage for rewards",
                 "Mobile-first experience"
+            ]
+        },
+        {
+            icon: SatelliteDish,
+            title: "Starlink Internet Access",
+            description: "Reliable, high-speed internet across all hubs.",
+            features: [
+                "Powered by Starlink tech",
+                "Consistent uptime for remote work",
+                "Stream, upload, and code without limits"
             ]
         },
         {
