@@ -1,20 +1,21 @@
-import HeroSection from './components/HeroSection'
-import  Navbar from './components/Navbar'
-import './index.css'
-import Footer from './components/Footer'
-import About from './components/About'
-import { ContactUs } from './components/ContactUs'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Pages/Home';
+import Signup from './Pages/Signup';
+import Login from './Pages/Login';
+import ForgotPassword from './Pages/ForgotPassword';
 
 function App() {
-
   return (
-    <div className="bg-[#1D3A8A]/10">
-      <Navbar/>
-      <HeroSection/>
-      <About/>
-      <ContactUs/>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

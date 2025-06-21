@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,12 +22,11 @@ const Navbar = () => {
       <nav 
         className={`fixed max-w-7xl top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg' 
+            ? 'bg-white/95 backdrop-blur-md shadow-lg'
             : 'bg-white/90 backdrop-blur-sm shadow-md'
         } rounded-2xl border border-gray-200/50`}
         style={{
           width: 'calc(100% - 2rem)',
-          // maxWidth: '1200px'
         }}
       >
         <div className="px-6 py-3">
@@ -55,6 +55,7 @@ const Navbar = () => {
 
             {/* Desktop Auth Buttons */}
             <div className="hidden lg:flex items-center space-x-3">
+              <Link to="/login">
               <button
                 className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 rounded-lg"
                 style={{
@@ -64,6 +65,8 @@ const Navbar = () => {
               >
                 Login
               </button>
+              </Link>
+              <Link to="/register">
               <button
                 className="px-6 py-2 text-white font-medium rounded-lg transition-all duration-200 hover:opacity-80 shadow-sm"
                 style={{
@@ -74,6 +77,7 @@ const Navbar = () => {
               >
                 Register
               </button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
