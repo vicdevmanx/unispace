@@ -68,7 +68,7 @@ const Navbar = () => {
                 style={{
                   fontFamily: 'Poppins, sans-serif',
                   fontSize: '1rem',
-                  backgroundColor: '#1B04BE'
+                  backgroundColor: '#1D3A8A'
                 }}
               >
                 Register
@@ -130,7 +130,7 @@ const Navbar = () => {
                 style={{
                   fontFamily: 'Poppins, sans-serif',
                   fontSize: '18px',
-                  backgroundColor: '#1B04BE'
+                  backgroundColor: '#1D3A8A'
                 }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >

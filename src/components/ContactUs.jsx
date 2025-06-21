@@ -45,7 +45,7 @@ export const ContactUs = () => {
 
   return (
     <>
-      <section className="text-center bg-[#1B04BE] text-white py-28 lg:py-32 px-4 pb-10">
+      <section className="text-center bg-[#1D3A8A] text-white py-28 lg:py-32 px-4 pb-10">
         <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
         <p className="text-xl max-w-2xl mx-auto">
           Get in touch with our team. We're here to help you make the most of your UniSpace experience.
@@ -58,7 +58,7 @@ export const ContactUs = () => {
           {/* Contact Form */}
           <div className="bg-white rounded-xl shadow p-8">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <Mail className="text-[#1B04BE]" size={24} /> Send us a Message
+              <Mail className="text-[#1D3A8A]" size={24} /> Send us a Message
             </h2>
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
               <div className="flex flex-col md:flex-row gap-4">
@@ -112,7 +112,7 @@ export const ContactUs = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#1B04BE] text-white font-semibold py-3 rounded-xl mt-2 text-lg hover:bg-[#1B04BE]/80 transition"
+                className="w-full bg-[#1D3A8A] text-white font-semibold py-3 rounded-xl mt-2 text-lg hover:bg-[#1D3A8A]/80 transition"
               >
                 Send Message
               </button>
@@ -136,37 +136,37 @@ export const ContactUs = () => {
             >
               {/* Email */}
               <div className="bg-white rounded-xl shadow p-6 flex items-start gap-4 min-w-0">
-                <span className="bg-[#1B04BE]/20 text-[#1B04BE] p-3 rounded-lg"><Mail size={24} /></span>
+                <span className="bg-[#1D3A8A]/20 text-[#1D3A8A] p-3 rounded-lg"><Mail size={24} /></span>
                 <div>
                   <div className="font-semibold">Email Us</div>
-                  <div className="font-medium text-[#1B04BE] break-all">info@unispace.com</div>
+                  <div className="font-medium text-[#1D3A8A] break-all">info@unispace.com</div>
                   <div className="text-sm text-[#6B7280]">We respond within 24 hours</div>
                 </div>
               </div>
               {/* Phone */}
               <div className="bg-white rounded-xl shadow p-6 flex items-start gap-4 min-w-0">
-                <span className="bg-[#1B04BE]/20 text-[#1B04BE] p-3 rounded-lg"><Phone size={24} /></span>
+                <span className="bg-[#1D3A8A]/20 text-[#1D3A8A] p-3 rounded-lg"><Phone size={24} /></span>
                 <div>
                   <div className="font-semibold">Call Us</div>
-                  <div className="font-medium text-[#1B04BE] break-all">+1 (555) 123-4567</div>
+                  <div className="font-medium text-[#1D3A8A] break-all">+1 (555) 123-4567</div>
                   <div className="text-sm text-[#6B7280]">Mon-Fri 9:00 AM - 6:00 PM EST</div>
                 </div>
               </div>
               {/* Address */}
               <div className="bg-white rounded-xl shadow p-6 flex items-start gap-4 min-w-0">
-                <span className="bg-[#1B04BE]/20 text-[#1B04BE] p-3 rounded-lg"><MapPin size={24} /></span>
+                <span className="bg-[#1D3A8A]/20 text-[#1D3A8A] p-3 rounded-lg"><MapPin size={24} /></span>
                 <div>
                   <div className="font-semibold">Visit Us</div>
-                  <div className="font-medium text-[#1B04BE] break-all">123 Innovation Drive</div>
+                  <div className="font-medium text-[#1D3A8A] break-all">123 Innovation Drive</div>
                   <div className="text-sm text-[#6B7280]">Tech Hub City, TC 12345</div>
                 </div>
               </div>
               {/* Office Hours */}
               <div className="bg-white rounded-xl shadow p-6 flex items-start gap-4 min-w-0">
-                <span className="bg-[#1B04BE]/20 text-[#1B04BE] p-3 rounded-lg"><Clock size={24} /></span>
+                <span className="bg-[#1D3A8A]/20 text-[#1D3A8A] p-3 rounded-lg"><Clock size={24} /></span>
                 <div>
                   <div className="font-semibold">Office Hours</div>
-                  <div className="font-medium text-[#1B04BE]">Monday - Friday</div>
+                  <div className="font-medium text-[#1D3A8A]">Monday - Friday</div>
                   <div className="text-sm text-[#6B7280]">9:00 AM - 6:00 PM EST</div>
                 </div>
               </div>

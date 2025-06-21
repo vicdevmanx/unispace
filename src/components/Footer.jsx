@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } 
 
 const Footer = () => {
   return (
-    <div className="bg-gradient-to-t from-[#1B04Be] to-[#1B04BE]">
+    <div className="bg-gradient-to-t from-[#1D3A8A] to-[#1D3A8A]">
       <footer className=" text-[#F3F4F6] pt-12 pb-6 px-4 mt-12">
         <div className="max-w-7xl  mx-auto justify-center grid grid-cols-1 md:grid-cols-4 gap-10 pb-8">
           {/* Brand & Social */}
@@ -11,22 +11,22 @@ const Footer = () => {
             <img src="/unispace_white_logo.svg" alt="Guru Innovation Hub" className="w-40 mb-4" />
             <p className="mb-6 text-[#D1D5DB]">A smart workspace booking platform that blends community engagement with gamification for students, freelancers, and remote workers.</p>
             <div className="flex space-x-4 text-2xl">
-              <a href="#" className="hover:text-[#1B04BE]" aria-label="Facebook"><Facebook size={22} /></a>
-              <a href="#" className="hover:text-[#1B04BE]" aria-label="Twitter"><Twitter size={22} /></a>
-              <a href="#" className="hover:text-[#1B04BE]" aria-label="Instagram"><Instagram size={22} /></a>
-              <a href="#" className="hover:text-[#1B04BE]" aria-label="LinkedIn"><Linkedin size={22} /></a>
-              <a href="#" className="hover:text-[#1B04BE]" aria-label="YouTube"><Youtube size={22} /></a>
+              <a href="#" className="hover:text-[#1D3A8A]" aria-label="Facebook"><Facebook size={22} /></a>
+              <a href="#" className="hover:text-[#1D3A8A]" aria-label="Twitter"><Twitter size={22} /></a>
+              <a href="#" className="hover:text-[#1D3A8A]" aria-label="Instagram"><Instagram size={22} /></a>
+              <a href="#" className="hover:text-[#1D3A8A]" aria-label="LinkedIn"><Linkedin size={22} /></a>
+              <a href="#" className="hover:text-[#1D3A8A]" aria-label="YouTube"><Youtube size={22} /></a>
             </div>
           </div>
           {/* Quick Links */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-white">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#about" className="hover:text-[#1B04BE]">About Us</a></li>
-              <li><a href="#courses" className="hover:text-[#1B04BE]">Services</a></li>
-              <li><a href="#project-bank" className="hover:text-[#1B04BE]">Contributors</a></li>
-              <li><a href="#faq" className="hover:text-[#1B04BE]">FAQ</a></li>
-              <li><a href="#contact" className="hover:text-[#1B04BE]">Contact Us</a></li>
+              <li><a href="#about" className="hover:text-[#1D3A8A]">About Us</a></li>
+              <li><a href="#courses" className="hover:text-[#1D3A8A]">Services</a></li>
+              <li><a href="#project-bank" className="hover:text-[#1D3A8A]">Contributors</a></li>
+              <li><a href="#faq" className="hover:text-[#1D3A8A]">FAQ</a></li>
+              <li><a href="#contact" className="hover:text-[#1D3A8A]">Contact Us</a></li>
             </ul>
           </div>
           {/* Contact Info */}

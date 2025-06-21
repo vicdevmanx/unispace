@@ -21,7 +21,7 @@
 .pattern {
   position: relative;
   z-index: 0;
-  background-color: #1B04BE;
+  background-color: #1D3A8A;
   background-image:
     linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
     linear-gradient(180deg, rgba(255,255,255,0.07) 1px, transparent 1px);

@@ -9,7 +9,7 @@ const About = () => {
     <>
       <section className="">
         {/* Top Section: Title + Subtitle */}
-        <div className="text-center bg-[#1B04BE] text-white py-28 lg:py-32 px-4">
+        <div className="text-center bg-[#1D3A8A] text-white py-28 lg:py-32 px-4">
           <h2 className="text-4xl font-bold mb-4">About UniSpace</h2>
           <p className="text-lg max-w-2xl mx-auto">
             Revolutionizing workspace booking through community engagement,
@@ -36,7 +36,7 @@ const About = () => {
             </p>
             <button
               onClick={() => window.location.href = '/register'}
-              className="inline-block bg-[#1B04BE] text-white font-medium py-3 px-6 rounded-md shadow hover:bg-[#1B04BEcc] transition"
+              className="inline-block bg-[#1D3A8A] text-white font-medium py-3 px-6 rounded-md shadow hover:bg-[#1D3A8Acc] transition"
             >
               Join Our Community
             </button>

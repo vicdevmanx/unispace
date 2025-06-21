@@ -9,7 +9,7 @@ import './index.css';
 
 function App() {
   return (
-    <div className="bg-[#1B04BE]/5">
+    <div className="bg-[#1D3A8A]/5">
      <Navbar />
 
      <HeroSection/>
