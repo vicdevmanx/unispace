@@ -1,5 +1,6 @@
-import { MoveRight, Play } from 'lucide-react'
+import { Play } from 'lucide-react'
 import React from 'react'
+// import HeroCard from './HeroCard'
 
 const Hero = () => {
     return (
@@ -18,14 +19,15 @@ const Hero = () => {
                 Your workspace, your community, your rewards
             </p>
             <div className="flex flex-col md:flex-row gap-4 mt-6 w-full md:w-auto justify-center items-center">
-                <button className="bg-[#4f7be7] justify-center flex gap-1 text-white p-2 px-6 rounded-[0.5rem] text-center shadow-lg w-full md:w-auto transition">
+                <button className="bg-[#4f7be7] hover:bg-[#214cc3] text-white p-2 px-6 rounded-[0.5rem] shadow-lg w-full md:w-auto transition">
                     Get Started Now
-                    <MoveRight />
                 </button>
                 <button className="w-full md:w-auto border border-[#4f7be7] text-[#4f7be7] hover:bg-[#e6edfa] hover:text-[#1D3A8A] rounded-[0.5rem] p-2 px-6 transition">
                     Explore Features
                 </button>
             </div>
+
+            {/* <HeroCard /> */}
         </div>
     )
 }
