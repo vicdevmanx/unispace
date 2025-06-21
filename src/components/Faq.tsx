@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Plus, Minus } from "lucide-react";
 
 const faqs = [
@@ -30,6 +30,7 @@ const faqs = [
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto">
@@ -45,7 +46,7 @@ const FAQ = () => {
         {faqs.map((faq, idx) => (
           <div
             key={idx}
-            className="bg-[#F9FAFB] rounded-lg p-4 shadow-sm border border-[#E5E7EB]"
+            className="bg-[#F9FAFB] rounded-lg p-4 shadow-sm border border-[#E5E7EB] transition-all duration-300"
           >
             <button
               className="w-full flex justify-between items-center text-left focus:outline-none"
@@ -72,8 +73,9 @@ const FAQ = () => {
             </button>
             {openIndex === idx && (
               <p
+                ref={el => { answerRefs.current[idx] = el; }}
                 id={`faq-answer-${idx}`}
-                className="mt-3 text-[#4B5563] text-[1rem] font-[400] leading-[1.5]"
+                className="mt-3 text-[#4B5563] text-[1rem] font-[400] leading-[1.5] transition-all duration-300"
               >
                 {faq.answer}
               </p>
