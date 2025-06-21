@@ -6,8 +6,11 @@ function App() {
 
   return (
     <div className="bg-[#1D3A8A]/10">
-      <Navbar/>
-      <Hero />
+      <div className='pattern bg-[#1D3A8A]'>
+        <Navbar/>
+        <Hero />
+      </div>
+      
     </div>
   )
 }
