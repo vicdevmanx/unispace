@@ -45,7 +45,7 @@ const Navbar = () => {
                   className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
                   style={{
                     fontFamily: 'Poppins, sans-serif',
-                    fontSize: '0.875rem'
+                    fontSize: '1rem'
                   }}
                 >
                   {link}
@@ -59,7 +59,7 @@ const Navbar = () => {
                 className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 rounded-lg"
                 style={{
                   fontFamily: 'Poppins, sans-serif',
-                  fontSize: '0.875rem'
+                  fontSize: '1rem'
                 }}
               >
                 Login
@@ -68,7 +68,7 @@ const Navbar = () => {
                 className="px-6 py-2 text-white font-medium rounded-lg transition-all duration-200 hover:opacity-80 shadow-sm"
                 style={{
                   fontFamily: 'Poppins, sans-serif',
-                  fontSize: '0.875rem',
+                  fontSize: '1rem',
                   backgroundColor: '#1D3A8A'
                 }}
               >
