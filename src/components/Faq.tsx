@@ -33,57 +33,71 @@ const FAQ = () => {
   const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto">
-      <div className="text-center mb-6">
-        <h2 className="font-[600] text-[2rem] leading-[1.3] text-[#1D3A8A] mb-1">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-[#4B5563] text-[1rem] font-[400] leading-[1.5]">
-          Everything You Need to Know!
-        </p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {faqs.map((faq, idx) => (
-          <div
-            key={idx}
-            className="bg-[#F9FAFB] rounded-lg p-4 shadow-sm border border-[#E5E7EB] transition-all duration-300"
-          >
-            <button
-              className="w-full flex justify-between items-center text-left focus:outline-none"
-              aria-expanded={openIndex === idx}
-              aria-controls={`faq-answer-${idx}`}
-              onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-            >
-              <span className="text-[#1D3A8A] text-[1.25rem] font-[500] leading-[1.4]">
-                {faq.question}
-              </span>
-              {openIndex === idx ? (
-                <Minus
-                  className="w-6 h-6 text-[#1D3A8A]"
-                  strokeWidth={2}
-                  aria-label="Collapse answer"
-                />
-              ) : (
-                <Plus
-                  className="w-6 h-6 text-[#1D3A8A]"
-                  strokeWidth={2}
-                  aria-label="Expand answer"
-                />
-              )}
-            </button>
-            {openIndex === idx && (
-              <p
-                ref={el => { answerRefs.current[idx] = el; }}
-                id={`faq-answer-${idx}`}
-                className="mt-3 text-[#4B5563] text-[1rem] font-[400] leading-[1.5] transition-all duration-300"
+    <section id="faq" aria-label="Frequently Asked Questions" className="py-12 md:py-20">
+      <div className="p-6 md:p-8 max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-4xl font-bold mb-4 text-[2rem] leading-[1.3] text-[#1D3A8A]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-[#4B5563] text-lg max-w-2xl mx-auto font-[400] leading-[1.5]">
+            Everything You Need to Know!
+          </p>
+        </div>
+        <div className="flex flex-col lg:flex-row gap-10 items-center justify-center">
+          {/* FAQ Cards */}
+          <div className="w-full lg:w-1/2 grid grid-cols-1 gap-4">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className="bg-[#F9FAFB] rounded-lg p-4 shadow-sm border border-[#E5E7EB] transition-all duration-300"
               >
-                {faq.answer}
-              </p>
-            )}
+                <button
+                  className="w-full flex justify-between items-center text-left focus:outline-none"
+                  aria-expanded={openIndex === idx}
+                  aria-controls={`faq-answer-${idx}`}
+                  onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                >
+                  <span className="text-[#1D3A8A] text-[1.25rem] font-[500] leading-[1.4]">
+                    {faq.question}
+                  </span>
+                  {openIndex === idx ? (
+                    <Minus
+                      className="w-6 h-6 text-[#1D3A8A]"
+                      strokeWidth={2}
+                      aria-label="Collapse answer"
+                    />
+                  ) : (
+                    <Plus
+                      className="w-6 h-6 text-[#1D3A8A]"
+                      strokeWidth={2}
+                      aria-label="Expand answer"
+                    />
+                  )}
+                </button>
+                {openIndex === idx && (
+                  <p
+                    ref={el => { answerRefs.current[idx] = el; }}
+                    id={`faq-answer-${idx}`}
+                    className="mt-3 text-[#4B5563] text-[1rem] font-[400] leading-[1.5] transition-all duration-300"
+                  >
+                    {faq.answer}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
-        ))}
+          {/* Image Side */}
+          <div className="w-full lg:w-1/2 flex justify-center items-center">
+            <img
+              src="/faq-image.png"
+              alt="faq image"
+              className="max-w-xs md:max-w-sm lg:max-w-md w-full h-auto object-contain animate-pulse"
+              style={{ animationDuration: '10s' }}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
