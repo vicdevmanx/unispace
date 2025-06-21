@@ -8,7 +8,7 @@ export const ContactUs = () => {
     <>
       <Navbar />
       {/* Hero Section */}
-      <section className="bg-[#3B0CA8] py-20 text-white text-center">
+      <section className="bg-[#1D3A8A] py-20 text-white text-center">
         <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
         <p className="text-xl max-w-2xl mx-auto">
           Get in touch with our team. We're here to help you make the most of your UniSpace experience.

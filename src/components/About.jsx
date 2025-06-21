@@ -18,7 +18,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
+        <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h3 className="text-3xl font-semibold text-[#111827] mb-6">
               Our Mission
