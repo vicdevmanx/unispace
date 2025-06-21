@@ -26,7 +26,6 @@ const Navbar = () => {
         } rounded-2xl border border-gray-200/50`}
         style={{
           width: 'calc(100% - 2rem)',
-          // maxWidth: '1200px'
         }}
       >
         <div className="px-6 py-3">
@@ -69,7 +68,7 @@ const Navbar = () => {
                 style={{
                   fontFamily: 'Poppins, sans-serif',
                   fontSize: '1rem',
-                  backgroundColor: '#1D3A8A'
+                  backgroundColor: '#1B04BE'
                 }}
               >
                 Register
@@ -131,7 +130,7 @@ const Navbar = () => {
                 style={{
                   fontFamily: 'Poppins, sans-serif',
                   fontSize: '18px',
-                  backgroundColor: '#1D3A8A'
+                  backgroundColor: '#1B04BE'
                 }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >

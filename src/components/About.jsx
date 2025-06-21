@@ -7,10 +7,9 @@ import { Users, Award, HeartHandshake, BookOpen } from 'lucide-react';
 const About = () => {
   return (
     <>
-      <Navbar />
-      <section className="pt-20 bg-[#F9FAFB]">
+      <section className="">
         {/* Top Section: Title + Subtitle */}
-        <div className="text-center bg-[#1D3A8A] text-white py-16 px-4">
+        <div className="text-center bg-[#1B04BE] text-white py-28 lg:py-32 px-4">
           <h2 className="text-4xl font-bold mb-4">About UniSpace</h2>
           <p className="text-lg max-w-2xl mx-auto">
             Revolutionizing workspace booking through community engagement,
@@ -36,8 +35,8 @@ const About = () => {
               collaboration.
             </p>
             <button
-              onClick={() => window.location.href = '/community'}
-              className="inline-block bg-[#1D3A8A] text-white font-medium py-3 px-6 rounded-md shadow hover:bg-[#1d3a8acc] transition"
+              onClick={() => window.location.href = '/register'}
+              className="inline-block bg-[#1B04BE] text-white font-medium py-3 px-6 rounded-md shadow hover:bg-[#1B04BEcc] transition"
             >
               Join Our Community
             </button>
@@ -46,16 +45,12 @@ const About = () => {
           {/* Image */}
           <div className="w-full">
             <img
-              src={AboutImage}
+              src="/about-section-image.jpg"
               alt="Community"
-              className="rounded-lg shadow-md w-full object-cover"
+              className="rounded w-full object-cover"
             />
           </div>
         </div>
-
-        {/* Example: Replace emoji icons with lucide-react icons in cards */}
-        
-        {/* You can continue replacing other icons in similar fashion throughout the project */}
       </section>
    
     </>

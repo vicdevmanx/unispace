@@ -33,13 +33,13 @@ const FAQ = () => {
   const answerRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   return (
-    <section id="faq" aria-label="Frequently Asked Questions" className="py-12 md:py-20 bg-white border-t border-[#E5E7EB]">
+    <section id="faq" aria-label="Frequently Asked Questions" className="py-12 md:py-20">
       <div className="p-6 md:p-8 max-w-7xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="font-[600] text-[2rem] leading-[1.3] text-[#1D3A8A] mb-1">
+          <h2 className="text-4xl font-bold mb-4 text-[2rem] leading-[1.3] text-[#1B04BE]">
             Frequently Asked Questions
           </h2>
-          <p className="text-[#4B5563] text-[1rem] font-[400] leading-[1.5]">
+          <p className="text-[#4B5563] text-lg max-w-2xl mx-auto font-[400] leading-[1.5]">
             Everything You Need to Know!
           </p>
         </div>
@@ -57,18 +57,18 @@ const FAQ = () => {
                   aria-controls={`faq-answer-${idx}`}
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                 >
-                  <span className="text-[#1D3A8A] text-[1.25rem] font-[500] leading-[1.4]">
+                  <span className="text-[#1B04BE] text-[1.25rem] font-[500] leading-[1.4]">
                     {faq.question}
                   </span>
                   {openIndex === idx ? (
                     <Minus
-                      className="w-6 h-6 text-[#1D3A8A]"
+                      className="w-6 h-6 text-[#1B04BE]"
                       strokeWidth={2}
                       aria-label="Collapse answer"
                     />
                   ) : (
                     <Plus
-                      className="w-6 h-6 text-[#1D3A8A]"
+                      className="w-6 h-6 text-[#1B04BE]"
                       strokeWidth={2}
                       aria-label="Expand answer"
                     />
