@@ -98,7 +98,7 @@ const Services = () => {
                                 key={index}
                                 className="bg-white/95 backdrop-blur-sm shadow-lg rounded-xl p-6 hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-[#1D3A8A]/20"
                             >
-                                <div className="flex flex-col items-start gap-2 mb-4">
+                                <div className="flex items-center mb-4">
                                     <div className="bg-[#1D3A8A] bg-opacity-10 p-3 rounded-lg mr-4">
                                         <service.icon className="h-6 w-6 stroke-[#1D3A8A]" strokeWidth={2} />
                                     </div>
