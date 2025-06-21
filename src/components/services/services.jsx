@@ -79,30 +79,9 @@ const Services = () => {
 
     return (
         <div className="min-h-screen">
-            {/* Hero Section */}
-            <section className="bg-gradient-to-r from-[#1D3A8A] via-[#1D3A8A]/90 to-[#1D3A8A] text-white py-20 pt-48">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="font-600 text-[2rem] md:text-5xl leading-[1.2] font-bold mb-6 animate-fade-in">
-                        Your Campus Co-working Companion
-                    </h1>
-                    <p className="text-[1rem] md:text-xl max-w-3xl mx-auto opacity-90 leading-[1.5] mb-8 animate-fade-in">
-                        Designed for students and freelancers who want more than just WiFi
-                    </p>
-
-
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-                        <button className="whitespace-nowrap bg-white text-[#1D3A8A] stroke- px-8 py-3 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-medium">
-                            Book Now
-                        </button>
-                        <button className="whitespace-nowrap border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-[#1D3A8A] hover:stroke-[#1D3A8A] transition-all duration-200 font-medium">
-                            Explore Services
-                        </button>
-                    </div>
-                </div>
-            </section>
 
             {/* Services Grid */}
-            <section className="py-20">
+            <section className="py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="font-600 text-[2rem] md:text-4xl font-bold text-neutral-900 mb-4">
@@ -241,9 +220,6 @@ const Services = () => {
                         <button className="whitespace-nowrap bg-white text-[#1D3A8A] stroke-[#1D3A8A] px-8 py-3 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-medium flex items-center justify-center">
                             <Headphones className="h-5 w-5 mr-2" />
                             Join UniSpace
-                        </button>
-                        <button className="whitespace-nowrap border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-[#1D3A8A] hover:stroke-[#1D3A8A] transition-all duration-200 font-medium">
-                            Explore Our Services
                         </button>
                     </div>
                 </div>
