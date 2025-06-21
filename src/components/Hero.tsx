@@ -4,7 +4,7 @@ import React from 'react'
 const Hero = () => {
     return (
         <div className="flex flex-col items-center justify-center h-screen px-4">
-            <span className="border items-center flex border-[1px] border-[#1D3A8A] p-1 rounded-lg text-[#1D3A8A] mb-3 text-sm md:text-base"><Play className='w-4 h-4' />
+            <span className="items-center flex border-[1px] border-[#1D3A8A] p-1 rounded-lg text-[#1D3A8A] mb-3 text-sm md:text-base"><Play className='w-4 h-4' />
                <p> Playover a smarter way to work, connect, and grow.</p>
             </span>
             <h1 className="font-[600] leading-[1.2] text-[2rem] md:text-[3.5rem] text-center mb-2">
