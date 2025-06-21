@@ -32,16 +32,16 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className=" p-6 md:p-8 max-w-2xl mx-auto">
+    <div className="p-6 md:p-8 max-w-7xl mx-auto">
       <div className="text-center mb-6">
-        <h2 className="font-[600] text-[1.5rem] leading-[1.3] text-[#1D3A8A] mb-1">
+        <h2 className="font-[600] text-[2rem] leading-[1.3] text-[#1D3A8A] mb-1">
           Frequently Asked Questions
         </h2>
         <p className="text-[#4B5563] text-[1rem] font-[400] leading-[1.5]">
           Everything You Need to Know!
         </p>
       </div>
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {faqs.map((faq, idx) => (
           <div
             key={idx}
