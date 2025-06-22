@@ -1,38 +1,93 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex items-stretch bg-[#F9FAFB]">
-      {/* Left Side (Blue with image and gradient overlay) */}
-      <div className="hidden md:flex flex-col justify-center items-center flex-1 relative overflow-hidden">
+      {/* Left Side (Image with logo and text at bottom) */}
+      <div className="hidden md:flex flex-col flex-1 relative overflow-hidden">
+       
+       
+
         {/* Background image */}
+
         <img
-          src="/about-section-image.jpg"
+          src="about-section-image.jpg"
           alt="Workspace reference"
           className="absolute inset-0 w-full h-full object-cover z-0"
         />
+
         {/* Blue gradient overlay with transparency */}
+
         <div className="absolute inset-0 bg-gradient-to-br from-[#1D3A8A]/90 via-[#1D3A8A]/80 to-[#1D3A8A]/60 backdrop-blur-sm z-10" />
-        {/* Content */}
-        <div className="relative z-20 flex flex-col justify-center items-center w-full p-12 text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">Welcome to UniSpace</h1>
-          <p className="text-lg mb-8 text-center max-w-md">
+
+        {/* Logo at the top left */}
+
+        <div 
+        className="relative z-20 flex items-start w-full pt-8 px-8 ">
+          <img src="/unispace_white_logo.svg" alt="UniSpace Logo" className="h-12 w-auto
+            cursor-pointer"
+          
+          onClick={() => navigate('/')}
+          />
+        </div>
+        {/* Text content bottom left */}
+        <div className="relative z-20 flex flex-col items-start w-full px-12 pb-8 mt-auto">
+          <h1 className="text-[2.2rem] md:text-[2.2rem] font-bold mb-4 text-white">Welcome to UniSpace</h1>
+          <p className="text-[1.1rem] mb-4 text-white max-w-md">
             Smart workspace booking platform designed for students, freelancers, and remote workers.
           </p>
-          <ul className="space-y-4 text-base">
-            <li className="flex items-center gap-2"><span className="text-2xl">•</span> Book workspaces instantly</li>
-            <li className="flex items-center gap-2"><span className="text-2xl">•</span> Connect with community</li>
-            <li className="flex items-center gap-2"><span className="text-2xl">•</span> Earn rewards for participation</li>
-          </ul>
+            {/* Slideshow of features with fade transition */}
+            <div className="mb-8 w-full">
+              {(() => {
+              const slides = [
+                "Book workspaces instantly with ease ",
+                "Connect with community from anywhere",
+                "Earn rewards for participation",
+              ];
+              const [current, setCurrent] = React.useState(0);
+              const [fade, setFade] = React.useState(true);
+
+              React.useEffect(() => {
+                setFade(false);
+                const fadeTimeout = setTimeout(() => setFade(true), 100); // trigger fade-in
+                const timer = setInterval(() => {
+                setFade(false);
+                setTimeout(() => {
+                  setCurrent((prev) => (prev + 1) % slides.length);
+                  setFade(true);
+                }, 300); // match fade-out duration
+                }, 4500);
+                return () => {
+                clearInterval(timer);
+                clearTimeout(fadeTimeout);
+                };
+              }, []);
+
+              return (
+                <div className="flex items-center gap-2 min-h-[2.5rem]">
+                <span className="text-2xl">•</span>
+                <span
+                  className={`text-base text-white transition-opacity duration-500 ease-in-out ${
+                  fade ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  {slides[current]}
+                </span>
+                </div>
+              );
+              })()}
+            </div>
         </div>
       </div>
       {/* Right Side (White, Centered Form) */}
       <div className="flex-1 flex justify-center items-center bg-white">
-        <div className="w-full shadow-md rounded-[10px]  max-w-md mx-auto p-8">
-          <h2 className="text-3xl font-bold text-center mb-2">Sign In</h2>
+        <div className="w-full shadow rounded-[10px]  max-w-md mx-auto p-8">
+          <h2 className="text-3xl font-bold text-[#1D3A8A] text-center mb-2">Log In</h2>
           <p className="text-center text-[#6B7280] mb-8">Enter your credentials to access your account</p>
           <form className="space-y-6">
             <div>
@@ -84,9 +139,9 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-[#1D3A8A] text-white font-semibold py-3 rounded-[10px] text-lg hover:bg-[#3B0CA8] transition"
+              className="w-full bg-[#1D3A8A] text-white font-semibold py-3 rounded-[10px] text-lg hover:opacity-80 transition"
             >
-              Sign In
+              Log In
             </button>
           </form>
          
