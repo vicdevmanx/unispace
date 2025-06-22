@@ -7,7 +7,7 @@ import FAQ from '../components/Faq'
 import { ContactUs } from '../components/ContactUs'
 import Footer from '../components/Footer'
 
-const Home = () => {
+const LandingPage = () => {
   return (
     <div className="bg-[#1D3A8A]/5">
           <Navbar />
@@ -34,4 +34,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default LandingPage
