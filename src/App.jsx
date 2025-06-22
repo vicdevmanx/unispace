@@ -19,6 +19,7 @@ import WorkspaceServicesPage from './pages/workspace/_pages/WorkspaceServicesPag
 import { WorkspacePortalProvider } from './contexts/WorkspacePortalContext';
 import WorkspaceRegister from './pages/workspace/_pages/_auth/WorkspaceRegister';
 import RequireWorkspace from './contexts/RequireWorkspace';
+import WorkspaceService from "./Pages/workspace-service/pages/workspace-service";
 
 function App() {
   return (
@@ -97,6 +98,12 @@ function App() {
                         <WorkspaceManagement />
                       </RequireAdmin>
                     </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/workspace-service"
+                  element={
+                      <WorkspaceService />
                   }
                 />
               </Routes>
