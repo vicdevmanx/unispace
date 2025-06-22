@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Signup = () => {
+const Register = () => {
   return (
     <div className="flex min-h-screen bg-[#F9FAFB]">
         
@@ -162,4 +162,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Register;
