@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useWorkspacePortalContext } from '../../../../contexts/WorkspacePortalContext';
 import { uploadImageToCloudinary } from '../../../../utils/cloudinary';
 import { getAuth, signOut } from 'firebase/auth';
+import Cookies from 'js-cookie';
 
 const initialForm = {
   name: '',
@@ -59,9 +60,10 @@ const WorkspaceRegister: React.FC = () => {
       if (ok) {
         setForm(initialForm);
         setImagePreview(null);
-        setSubmitting(false);
         await signOut(getAuth());
-        navigate('/workspace/login');
+        Cookies.remove('unispace_session');
+        setSubmitting(false);
+        setTimeout(() => navigate('/workspace/login'), 10);
       } else {
         setSubmitting(false);
       }
@@ -74,7 +76,7 @@ const WorkspaceRegister: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB] relative">
       {/* Loader overlay */}
-      {(loading || submitting) && (
+      {submitting && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
           <div className="w-16 h-16 border-4 border-blue-200 border-t-[#1D3A8A] rounded-full animate-spin"></div>
         </div>

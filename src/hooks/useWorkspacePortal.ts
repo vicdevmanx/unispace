@@ -21,23 +21,20 @@ export function useWorkspacePortal() {
   const [workspace, setWorkspace] = useState<WorkspacePortal | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
 
   // Listen for workspace admin auth state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setLoading(true);
+      setPending(false);
       if (user) {
         const wsDoc = await getDoc(doc(db, 'workspaces', user.uid));
         if (wsDoc.exists()) {
           const data = wsDoc.data() as WorkspacePortal;
-          if (!data.approved) {
-            await signOut(auth);
-            setWorkspace(null);
-            setError('Your workspace is pending admin approval.');
-          } else {
-            setWorkspace({ ...data, id: wsDoc.id });
-            setError(null);
-          }
+          setWorkspace({ ...data, id: wsDoc.id });
+          setPending(!data.approved);
+          setError(!data.approved ? 'Your workspace is pending admin approval.' : null);
         } else {
           setWorkspace(null);
         }
@@ -53,26 +50,21 @@ export function useWorkspacePortal() {
   const login = async (email: string, password: string) => {
     setLoading(true);
     setError(null);
+    setPending(false);
     try {
       const cred = await signInWithEmailAndPassword(auth, email, password);
       const wsDoc = await getDoc(doc(db, 'workspaces', cred.user.uid));
       if (wsDoc.exists()) {
         const data = wsDoc.data() as WorkspacePortal;
-        if (!data.approved) {
-          await signOut(auth);
-          setWorkspace(null);
-          setError('Your workspace is pending admin approval.');
-          setLoading(false);
-          return false;
-        }
+        setWorkspace({ ...data, id: wsDoc.id });
+        setPending(!data.approved);
+        setError(!data.approved ? 'Your workspace is pending admin approval.' : null);
         Cookies.set('unispace_session', JSON.stringify({
           userType: 'workspace',
           id: wsDoc.id,
           email: data.email,
           name: data.name,
         }), { expires: 7 });
-        setWorkspace({ ...data, id: wsDoc.id });
-        setError(null);
         return true;
       } else {
         setError('Workspace not found.');
@@ -128,6 +120,7 @@ export function useWorkspacePortal() {
       await signOut(auth);
       Cookies.remove('unispace_session');
       setWorkspace(null);
+      setPending(false);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -160,6 +153,7 @@ export function useWorkspacePortal() {
     workspace,
     loading,
     error,
+    pending,
     login,
     register,
     logout,

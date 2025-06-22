@@ -8,7 +8,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <AdminSidebar />
       <div className="flex-1 flex flex-col">
         {/* Top Navbar */}
-        <div className="flex justify-end items-center h-16 px-6 bg-white shadow-sm">
+        <div className="flex justify-between items-center h-16 px-6 bg-white shadow-sm">
+        <h2 className="text-xl font-bold text-[#1D3A8A]">Admin Panel</h2>
           <AdminProfileDropdown />
         </div>
         {/* Main Content */}
