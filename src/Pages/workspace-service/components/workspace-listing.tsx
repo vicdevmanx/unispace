@@ -5,7 +5,7 @@ const WorkspaceListing = () => {
 
 type Workspace = {
     id: number;
-    category: string;
+    category?: string;
     provider: string;
     name: string;
     rating: number;
@@ -13,7 +13,7 @@ type Workspace = {
     image: string;
     description: string;
     location: string;
-    amenities: string[];
+    amenities?: string[];
 };
 
 const workspaceListing: Workspace[] = [
@@ -136,7 +136,7 @@ const workspaceListing: Workspace[] = [
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto lg:px-6 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
           {workspaceListing ? 
            workspaceListing.map((workspace) => (
