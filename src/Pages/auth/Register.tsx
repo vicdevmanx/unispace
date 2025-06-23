@@ -34,8 +34,9 @@ const Register = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSuccess(null);
+  e.preventDefault();
+  setSuccess(null);
+  try {
     const user = await register(
       form.email,
       form.password,
@@ -47,9 +48,11 @@ const Register = () => {
       toast.success('Registration successful! Please log in.');
       setTimeout(() => navigate('/login'), 1500); 
     }
-  };
+  } catch (err) {
+    toast.error(err.message || 'Registration failed. Please try again.');
+  }
+};
 
-  // Testimonials data
   const testimonials = [
     {
       text: 'UniSpace transformed how I collaborate with my team—everything I need is right here!',
@@ -237,7 +240,7 @@ const Register = () => {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            
+             
             background: 'linear-gradient(135deg, rgba(29, 58, 138, 0.25) 0%, rgba(29, 58, 138, 0.8) 100%)',
             zIndex: 1,
             opacity: 0.85,

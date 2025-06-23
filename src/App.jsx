@@ -20,7 +20,7 @@ import { WorkspacePortalProvider } from './contexts/WorkspacePortalContext';
 import WorkspaceRegister from './pages/workspace/_pages/_auth/WorkspaceRegister';
 import RequireWorkspace from './contexts/RequireWorkspace';
 import WorkspaceService from "./Pages/workspace-service/pages/workspace-service";
-import NotFound from "./Pages/NotFound";
+// import NotFound from "./Pages/NotFound";
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
               <Routes>
                 {/* Public Routea */}
                 <Route path="/" element={<LandingPage />} />
-                <Route path="*" element={<NotFound />} />
+                {/* <Route path="*" element={<NotFound />} /> */}
                 {/* Auth Routes */}
                 <Route
                   path="/register"
