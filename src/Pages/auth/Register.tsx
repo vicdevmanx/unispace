@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { toast, Toaster } from 'sonner'; 
+import { toast } from 'sonner'; 
 
 const Register = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const Register = () => {
     if (user) {
       setSuccess('Registration successful! Please log in.');
       toast.success('Registration successful! Please log in.');
-      setTimeout(() => navigate('/login'), 3000); 
+      navigate('/login')
     }
   } catch (err) {
     toast.error(err.message || 'Registration failed. Please try again.');
@@ -79,7 +79,7 @@ const Register = () => {
 
   return (
     <div className="flex min-h-screen bg-[#F9FAFB]">
-      <Toaster position="top-right" richColors /> 
+      
       
       <div className="w-full md:w-1/2 flex items-center justify-center flex-col px-4 sm:px-6">
         <div className="w-full max-w-md space-y-md">

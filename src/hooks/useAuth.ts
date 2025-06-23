@@ -37,7 +37,7 @@ export function useAuth() {
           firstname,
           lastname,
           userType,
-          photoURL: cred.user.photoURL || undefined,
+          photoURL: cred.user.photoURL || '', //i removed the null to emty string
           streak: 0,
           points: 0,
           bookings: 0,
@@ -47,8 +47,14 @@ export function useAuth() {
           badges: [],
           isEmailVerified: cred.user.emailVerified,
         };
-        await setDoc(doc(db, 'user', cred.user.uid), userData);
-        return userData;
+        try {
+          await setDoc(doc(db, 'users', cred.user.uid), userData);
+          return userData; 
+        } catch (err: any) {
+          console.log(err);
+          setError(err.message);
+          return null; //this will return nothing when the user is not creted
+        }
       }
       return null;
     } catch (err: any) {
@@ -143,4 +149,4 @@ export function useAuth() {
     forgotPassword,
     logout,
   };
-} 
+}

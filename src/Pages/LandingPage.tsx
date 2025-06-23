@@ -6,10 +6,12 @@ import Services from '../components/services'
 import FAQ from '../components/Faq'
 import { ContactUs } from '../components/ContactUs'
 import Footer from '../components/Footer'
+import { Toaster } from 'sonner' 
 
 const LandingPage = () => {
   return (
     <div className="bg-[#1D3A8A]/5">
+      <Toaster position="top-right" richColors /> 
           <Navbar />
           <HeroSection />
     
