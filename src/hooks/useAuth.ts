@@ -47,7 +47,7 @@ export function useAuth() {
           badges: [],
           isEmailVerified: cred.user.emailVerified,
         };
-        await setDoc(doc(db, 'users', cred.user.uid), userData);
+        await setDoc(doc(db, 'user', cred.user.uid), userData);
         return userData;
       }
       return null;

@@ -9,8 +9,8 @@ const Register = () => {
   const { register, loading, error } = useAuth();
 
   const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     referral: '',
@@ -40,13 +40,13 @@ const Register = () => {
     const user = await register(
       form.email,
       form.password,
-      form.firstName,
-      form.lastName
+      form.firstname,
+      form.lastname
     );
     if (user) {
       setSuccess('Registration successful! Please log in.');
       toast.success('Registration successful! Please log in.');
-      setTimeout(() => navigate('/login'), 1500); 
+      setTimeout(() => navigate('/login'), 3000); 
     }
   } catch (err) {
     toast.error(err.message || 'Registration failed. Please try again.');
@@ -100,16 +100,16 @@ const Register = () => {
             <div className="flex gap-4">
               <div className="flex-1">
                 <label
-                  htmlFor="firstName"
+                  htmlFor="firstname"
                   className="block text-[0.875rem] font-[400] leading-[1.6] text-[#111827] "
                 >
                   First Name*
                 </label>
                 <input
                   type="text"
-                  id="firstName"
+                  id="firstname"
                   placeholder="Dawn"
-                  value={form.firstName}
+                  value={form.firstname}
                   onChange={handleChange}
                   className="w-full mt-0.5 px-4 py-2 border border-[#E5E7EB] rounded-[0.5rem] text-[0.875rem] text-[#111827] placeholder-[#4B5563] focus:border-[#1D3A8A] focus:outline-none "
                   required
@@ -117,16 +117,16 @@ const Register = () => {
               </div>
               <div className="flex-1">
                 <label
-                  htmlFor="lastName"
+                  htmlFor="lastname"
                   className="block text-[0.875rem] font-[400] leading-[1.6] text-[#111827] "
                 >
                   Last Name*
                 </label>
                 <input
                   type="text"
-                  id="lastName"
+                  id="lastname"
                   placeholder="Cobham"
-                  value={form.lastName}
+                  value={form.lastname}
                   onChange={handleChange}
                   className="w-full mt-0.5 px-4 py-2 border border-[#E5E7EB] rounded-[0.5rem] text-[0.875rem] text-[#111827] placeholder-[#4B5563] focus:border-[#1D3A8A] focus:outline-none "
                   required
