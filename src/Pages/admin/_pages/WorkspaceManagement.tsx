@@ -12,7 +12,9 @@ const initialForm = {
   email: '',
   password: '',
   phoneNumber: '',
-  imageFile: null as File | null,
+  brandLogo: null as File | null,
+  cacDocument: null as File | null,
+  cacNumber: '',
   address: '',
 };
 
@@ -21,7 +23,7 @@ const WorkspaceManagement = () => {
     workspaces,
     loading,
     error,
-    createWorkspace,
+    // createWorkspace,
     listWorkspaces,
     deleteWorkspace,
     toggleWorkspaceVisibility,
@@ -32,7 +34,8 @@ const WorkspaceManagement = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [selectedWorkspace, setSelectedWorkspace] = useState<any>(null);
   const [showViewDialog, setShowViewDialog] = useState(false);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [brandLogoPreview, setBrandLogoPreview] = useState<string | null>(null);
+  const [cacDocumentPreview, setCacDocumentPreview] = useState<string | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [services, setServices] = useState<any[]>([]);
   const [servicesLoading, setServicesLoading] = useState(false);
@@ -66,17 +69,19 @@ const WorkspaceManagement = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, files } = e.target as any;
-    if (name === 'imageFile' && files && files[0]) {
+    if ((name === 'brandLogo' || name === 'cacDocument') && files && files[0]) {
       const file = files[0];
       if (file.size > 5 * 1024 * 1024) {
         setFormError('Image size must be less than 5MB');
-        setForm((prev) => ({ ...prev, imageFile: null }));
-        setImagePreview(null);
+        setForm((prev) => ({ ...prev, [name]: null }));
+        if (name === 'brandLogo') setBrandLogoPreview(null);
+        if (name === 'cacDocument') setCacDocumentPreview(null);
         return;
       }
       setFormError(null);
-      setForm((prev) => ({ ...prev, imageFile: file }));
-      setImagePreview(URL.createObjectURL(file));
+      setForm((prev) => ({ ...prev, [name]: file }));
+      if (name === 'brandLogo') setBrandLogoPreview(URL.createObjectURL(file));
+      if (name === 'cacDocument') setCacDocumentPreview(URL.createObjectURL(file));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
@@ -89,17 +94,18 @@ const WorkspaceManagement = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.imageFile) return;
+    if (!form.brandLogo) return;
     setCreating(true);
 
     // 1. Create workspace (pass password to backend/Firebase)
-    await createWorkspace({ ...form, password: form.password, imageFile: form.imageFile! });
+    // await createWorkspace({ ...form, password: form.password, imageFile: form.imageFile! });
 
     // (Serverless function call for ZeptoMail removed)
     // If you want to send email, call your utility or backend here
 
     setForm(initialForm);
-    setImagePreview(null);
+    setBrandLogoPreview(null);
+    setCacDocumentPreview(null);
     setCreating(false);
     setShowDialog(false);
     listWorkspaces();
@@ -149,7 +155,9 @@ const WorkspaceManagement = () => {
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Address</th>
-                  <th>Image</th>
+                  <th>CAC Number</th>
+                  <th>Brand Logo</th>
+                  <th>CAC Document</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -161,8 +169,12 @@ const WorkspaceManagement = () => {
                     <td>{ws.email}</td>
                     <td>{ws.phoneNumber}</td>
                     <td>{ws.address}</td>
+                    <td>{ws.cacNumber}</td>
                     <td>
-                      <img src={ws.image} alt={ws.name} className="w-12 h-12 object-cover rounded" />
+                      {ws.brandLogo && <img src={ws.brandLogo} alt={ws.name + ' logo'} className="w-12 h-12 object-cover rounded" />}
+                    </td>
+                    <td>
+                      {ws.cacDocument && <a href={ws.cacDocument} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View</a>}
                     </td>
                     <td>
                       <span className={`px-2 py-1 rounded text-xs font-semibold ${ws.visible !== false ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600'}`}>
@@ -221,11 +233,17 @@ const WorkspaceManagement = () => {
               &times;
             </button>
             <h2 className="text-xl font-bold mb-4 text-[#1D3A8A]">Workspace Details</h2>
-            <img src={selectedWorkspace.image} alt={selectedWorkspace.name} className="w-24 h-24 rounded-full object-cover mb-4 mx-auto border-4 border-[#1D3A8A]" />
+            {selectedWorkspace.brandLogo && (
+              <img src={selectedWorkspace.brandLogo} alt={selectedWorkspace.name + ' logo'} className="w-24 h-24 rounded-full object-cover mb-4 mx-auto border-4 border-[#1D3A8A]" />
+            )}
             <div className="mb-2"><span className="font-semibold">Name:</span> {selectedWorkspace.name}</div>
             <div className="mb-2"><span className="font-semibold">Email:</span> {selectedWorkspace.email}</div>
             <div className="mb-2"><span className="font-semibold">Phone:</span> {selectedWorkspace.phoneNumber}</div>
             <div className="mb-2"><span className="font-semibold">Address:</span> {selectedWorkspace.address}</div>
+            <div className="mb-2"><span className="font-semibold">CAC Number:</span> {selectedWorkspace.cacNumber}</div>
+            <div className="mb-2"><span className="font-semibold">CAC Document:</span> {selectedWorkspace.cacDocument && (
+              <a href={selectedWorkspace.cacDocument} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View Document</a>
+            )}</div>
             {/* List services here */}
             <div className="mt-4 text-[#4B5563]">
               <span className="font-semibold">Services:</span>

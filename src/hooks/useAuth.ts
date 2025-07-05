@@ -8,10 +8,9 @@ import {
   signOut,
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { User } from '../types/User';
+import { User, UserType } from '../types/User';
 import Cookies from 'js-cookie';
 
-export type UserType = 'normal' | 'admin';
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);
@@ -37,7 +36,7 @@ export function useAuth() {
           firstname,
           lastname,
           userType,
-          photoURL: cred.user.photoURL || undefined,
+          photoURL: cred.user.photoURL || '', //i removed the null to emty string
           streak: 0,
           points: 0,
           bookings: 0,
@@ -47,8 +46,14 @@ export function useAuth() {
           badges: [],
           isEmailVerified: cred.user.emailVerified,
         };
-        await setDoc(doc(db, 'users', cred.user.uid), userData);
-        return userData;
+        try {
+          await setDoc(doc(db, 'users', cred.user.uid), userData);
+          return userData; 
+        } catch (err: any) {
+          console.log(err);
+          setError(err.message);
+          return null; //this will return nothing when the user is not creted
+        }
       }
       return null;
     } catch (err: any) {
@@ -69,6 +74,10 @@ export function useAuth() {
         const userDoc = await getDoc(doc(db, 'users', cred.user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data() as User;
+          if (userData.userType !== 'normal') {
+            setError('This login is only for normal users.');
+            return null;
+          }
           Cookies.set('unispace_session', JSON.stringify({
             userType: userData.userType,
             uid: userData.uid,
@@ -143,4 +152,4 @@ export function useAuth() {
     forgotPassword,
     logout,
   };
-} 
+}

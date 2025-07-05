@@ -19,7 +19,7 @@ const initialForm: Partial<Service> & { durationUnit?: string } = {
   features: [],
   type: '',
   description: '',
-  durationUnit: 'Minutes',
+  durationUnit: '',
 };
 
 interface ServiceDialogProps {

@@ -45,6 +45,7 @@ export function useWorkspaceServices(workspaceId: string | undefined) {
         images: imageUrls,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        workspaceId,
       };
       await addDoc(collection(db, 'workspaces', workspaceId, 'services'), newService);
       await listServices();

@@ -35,11 +35,19 @@ const WorkspaceProfileDropdown = () => {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1D3A8A] text-white font-bold text-lg focus:outline-none"
+        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1D3A8A] text-white font-bold text-lg focus:outline-none overflow-hidden"
         onClick={() => setOpen((prev) => !prev)}
         aria-label="Workspace profile menu"
       >
-        {getInitials(workspace.name)}
+        {workspace.image ? (
+          <img 
+            src={workspace.image} 
+            alt={workspace.name} 
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          getInitials(workspace.name)
+        )}
       </button>
       {open && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">

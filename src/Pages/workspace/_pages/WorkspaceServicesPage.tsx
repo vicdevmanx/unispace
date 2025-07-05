@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import WorkspaceLayout from '../_components/WorkspaceLayout';
 import { Service } from '../../../types/Workspace';
 import { useWorkspaceServices } from '../../../hooks/useWorkspaceServices';
 import { useWorkspacePortalContext } from '../../../contexts/WorkspacePortalContext';
 import ServiceDialog from './ServiceDialog';
+import { Eye, Trash2 } from 'lucide-react';
+import WorkspaceServiceViewDialog from '../_components/WorkspaceServiceViewDialog';
 
 const initialForm: Partial<Service> = {
   name: '',
@@ -30,6 +33,10 @@ const WorkspaceServicesPage = () => {
   const [form, setForm] = useState<Partial<Service>>(initialForm);
   const [imageFiles, setImageFiles] = useState<(File | string)[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [viewDialogOpen, setViewDialogOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [serviceToDelete, setServiceToDelete] = useState<Service | null>(null);
 
   const {
     services,
@@ -44,6 +51,13 @@ const WorkspaceServicesPage = () => {
     listServices();
     // eslint-disable-next-line
   }, []);
+
+  // Show error toast when there's an error
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -74,15 +88,39 @@ const WorkspaceServicesPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
     await createService({ ...form, images: imageFiles });
     setForm(initialForm);
     setImageFiles([]);
     setImagePreviews([]);
     setShowDialog(false);
+      toast.success('Service created successfully!');
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to create service');
+    }
   };
 
-  const handleDelete = async (id: string) => {
-    await deleteService(id);
+  const handleDeleteClick = (service: Service) => {
+    setServiceToDelete(service);
+    setConfirmDeleteOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (serviceToDelete) {
+      try {
+        await deleteService(serviceToDelete.id);
+        setServiceToDelete(null);
+        setConfirmDeleteOpen(false);
+        toast.success('Service deleted successfully!');
+      } catch (err: any) {
+        toast.error(err.message || 'Failed to delete service');
+      }
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setServiceToDelete(null);
+    setConfirmDeleteOpen(false);
   };
 
   return (
@@ -98,7 +136,6 @@ const WorkspaceServicesPage = () => {
         </div>
         <div className="bg-white rounded-xl shadow p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">All Services</h2>
-          {error && <div className="text-red-500 mb-2">{error}</div>}
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -136,7 +173,19 @@ const WorkspaceServicesPage = () => {
                         <td>₦{service.minCharge}</td>
                         <td>₦{service.maxCharge}</td>
                         <td>
-                          <button className="text-red-500 hover:underline" onClick={() => handleDelete(service.id)} disabled={loading}>Delete</button>
+                          <button
+                            className="text-blue-600 hover:text-blue-800 mr-2"
+                            onClick={() => {
+                              setSelectedService(service);
+                              setViewDialogOpen(true);
+                            }}
+                            title="View"
+                          >
+                            <Eye size={18} />
+                          </button>
+                          <button className="text-red-500 hover:text-red-700" onClick={() => handleDeleteClick(service)} disabled={loading} title="Delete">
+                            <Trash2 size={18} />
+                          </button>
                         </td>
                       </tr>
                     ))
@@ -157,6 +206,34 @@ const WorkspaceServicesPage = () => {
               listServices();
             }}
           />
+        )}
+        <WorkspaceServiceViewDialog
+          open={viewDialogOpen}
+          onClose={() => setViewDialogOpen(false)}
+          service={selectedService}
+        />
+        {confirmDeleteOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 px-2">
+            <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm relative flex flex-col items-center">
+              <h3 className="text-lg font-bold mb-4 text-[#1D3A8A]">Confirm Delete</h3>
+              <p className="mb-6 text-center">Are you sure you want to delete <span className="font-semibold">{serviceToDelete?.name}</span>?</p>
+              <div className="flex gap-4">
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  onClick={handleConfirmDelete}
+                  disabled={loading}
+                >
+                  Yes, Delete
+                </button>
+                <button
+                  className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300"
+                  onClick={handleCancelDelete}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
         )}
     </WorkspaceLayout>
   );

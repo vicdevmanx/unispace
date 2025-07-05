@@ -17,7 +17,7 @@ const Login = () => {
     const user = await login(email, password);
     if (user) {
       toast.success('Login successful!');
-      navigate('/home');
+      navigate('/user-home');
     } else {
       toast.error(error || 'Login failed. Please check your credentials.');
     }

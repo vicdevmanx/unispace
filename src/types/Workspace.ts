@@ -1,15 +1,19 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface Workspace {
   id: string;
   name: string;
   email: string;
   phoneNumber: string;
-  image: string;
   address: string;
   createdAt: string;
   updatedAt: string;
   adminUid: string;
   visible: boolean;
   approved: boolean;
+  brandLogo?: string;
+  cacDocument?: string;
+  cacNumber?: string;
   [key: string]: any;
 }
 
@@ -33,4 +37,33 @@ export interface Service {
   visible?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  durationUnit?: string;
+  workspaceId?: string;
+}
+
+export interface Discount {
+  id: string;
+  code: string;
+  percentage: number;
+  expiry: string; // ISO date string
+  usageLimit: number;
+}
+
+export interface Booking {
+  id?: string;
+  userId: string;
+  serviceId: string;
+  workspaceId: string;
+  date: string;
+  startTime: string; 
+  duration: number;
+  numSeats: number;
+  totalPrice: number;
+  discountCode?: string;
+  status: 'pending' | 'inprogress' | 'completed' | 'cancelled';
+  createdAt: string;
+  updatedAt: string;
+  durationUnit?: string;
+  paused?: boolean;
+  pausedAt?: string | null;
 }

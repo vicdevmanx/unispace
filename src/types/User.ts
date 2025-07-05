@@ -1,4 +1,6 @@
-export type UserType = 'normal' | 'admin';
+import { Timestamp } from 'firebase/firestore';
+
+export type UserType = 'normal' | 'admin' | 'workspace';
 
 export interface Transaction {
   id: string;
@@ -25,8 +27,8 @@ export interface User {
   referredBy?: string;
   bookings: number;
   transactionHistory: Transaction[];
-  createdAt: string; // ISO string
-  updatedAt: string; // ISO string
+  createdAt?: string | Timestamp;
+  updatedAt: string | Timestamp; // ISO string
   badges?: string[];
   isEmailVerified?: boolean;
   [key: string]: any;

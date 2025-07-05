@@ -16,42 +16,42 @@ export function useWorkspace() {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
 
   // Create a new workspace (registers a workspace admin user and stores workspace data)
-  const createWorkspace = async (data: {
-    name: string;
-    email: string;
-    password: string;
-    phoneNumber: string;
-    imageFile: File;
-    address: string;
-  }) => {
-    setLoading(true);
-    setError(null);
-    try {
-      // 1. Register workspace admin user
-      const cred = await createUserWithEmailAndPassword(auth, data.email, data.password);
-      // 2. Upload image to Cloudinary
-      const imageUrl = await uploadImageToCloudinary(data.imageFile);
-      // 3. Store workspace data in Firestore
-      const workspaceData = {
-        name: data.name,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-        image: imageUrl,
-        address: data.address,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        adminUid: cred.user.uid,
-        visible: true,
-      };
-      await setDoc(doc(db, 'workspaces', cred.user.uid), workspaceData);
-      return workspaceData;
-    } catch (err: any) {
-      setError(err.message);
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const createWorkspace = async (data: {
+  //   name: string;
+  //   email: string;
+  //   password: string;
+  //   phoneNumber: string;
+  //   imageFile: File;
+  //   address: string;
+  // }) => {
+  //   setLoading(true);
+  //   setError(null);
+  //   try {
+  //     // 1. Register workspace admin user
+  //     const cred = await createUserWithEmailAndPassword(auth, data.email, data.password);
+  //     // 2. Upload image to Cloudinary
+  //     const imageUrl = await uploadImageToCloudinary(data.imageFile);
+  //     // 3. Store workspace data in Firestore
+  //     const workspaceData = {
+  //       name: data.name,
+  //       email: data.email,
+  //       phoneNumber: data.phoneNumber,
+  //       image: imageUrl,
+  //       address: data.address,
+  //       createdAt: new Date().toISOString(),
+  //       updatedAt: new Date().toISOString(),
+  //       adminUid: cred.user.uid,
+  //       visible: true,
+  //     };
+  //     await setDoc(doc(db, 'workspaces', cred.user.uid), workspaceData);
+  //     return workspaceData;
+  //   } catch (err: any) {
+  //     setError(err.message);
+  //     return null;
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // List all workspaces
   const listWorkspaces = async () => {
@@ -124,7 +124,7 @@ export function useWorkspace() {
     loading,
     error,
     workspaces,
-    createWorkspace,
+    // createWorkspace,
     listWorkspaces,
     deleteWorkspace,
     toggleWorkspaceVisibility,

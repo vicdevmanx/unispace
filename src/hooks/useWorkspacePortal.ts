@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { auth, db } from '../lib/Firebase';
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword, User as FirebaseUser } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword, User as FirebaseUser, updatePassword } from 'firebase/auth';
+import { doc, getDoc, setDoc, collection, addDoc, getDocs, updateDoc, deleteDoc, doc as firestoreDoc, DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
 import Cookies from 'js-cookie';
 
 export interface WorkspacePortal {
@@ -15,6 +15,9 @@ export interface WorkspacePortal {
   updatedAt?: string;
   adminUid?: string;
   approved: boolean;
+  cacNumber?: string;
+  brandLogo?: string;
+  cacDocument?: string;
 }
 
 export function useWorkspacePortal() {
@@ -87,7 +90,9 @@ export function useWorkspacePortal() {
     password: string;
     phoneNumber: string;
     address: string;
-    image?: string;
+    cacNumber?: string;
+    brandLogo?: string;
+    cacDocument?: string;
   }) => {
     setLoading(true);
     setError(null);
@@ -98,7 +103,10 @@ export function useWorkspacePortal() {
         email: data.email,
         phoneNumber: data.phoneNumber,
         address: data.address,
-        image: data.image || '',
+        cacNumber: data.cacNumber || '',
+        brandLogo: data.brandLogo || '',
+        cacDocument: data.cacDocument || '',
+        image: '', // deprecated, for backward compatibility
         approved: false,
         createdAt: new Date().toISOString(),
       });
@@ -149,6 +157,51 @@ export function useWorkspacePortal() {
     }
   }, [workspace]);
 
+  // Discount code management
+  const getDiscounts = async (workspaceId: string) => {
+    const discountsCol = collection(db, 'workspaces', workspaceId, 'discounts');
+    const snapshot = await getDocs(discountsCol);
+    return snapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => ({ id: doc.id, ...doc.data() }));
+  };
+
+  const addDiscount = async (workspaceId: string, discount: Omit<any, 'id'>) => {
+    const discountsCol = collection(db, 'workspaces', workspaceId, 'discounts');
+    const docRef = await addDoc(discountsCol, discount);
+    return { id: docRef.id, ...discount };
+  };
+
+  const updateDiscount = async (workspaceId: string, discountId: string, discount: any) => {
+    const discountRef = firestoreDoc(db, 'workspaces', workspaceId, 'discounts', discountId);
+    await updateDoc(discountRef, discount);
+  };
+
+  const deleteDiscount = async (workspaceId: string, discountId: string) => {
+    const discountRef = firestoreDoc(db, 'workspaces', workspaceId, 'discounts', discountId);
+    await deleteDoc(discountRef);
+  };
+
+  const updateWorkspaceProfile = async (workspaceId: string, profileData: {
+    name: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+    image?: string;
+  }) => {
+    const workspaceRef = doc(db, 'workspaces', workspaceId);
+    await updateDoc(workspaceRef, {
+      ...profileData,
+      updatedAt: new Date().toISOString(),
+    });
+  };
+
+  const updateWorkspacePassword = async (newPassword: string) => {
+    const user = auth.currentUser;
+    if (!user) {
+      throw new Error('No authenticated user found');
+    }
+    await updatePassword(user, newPassword);
+  };
+
   return {
     workspace,
     loading,
@@ -157,5 +210,11 @@ export function useWorkspacePortal() {
     login,
     register,
     logout,
+    getDiscounts,
+    addDiscount,
+    updateDiscount,
+    deleteDiscount,
+    updateWorkspaceProfile,
+    updateWorkspacePassword,
   };
 } 
