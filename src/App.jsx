@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "sonner";
 import LandingPage from "./pages/LandingPage";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
@@ -19,7 +20,20 @@ import WorkspaceServicesPage from './pages/workspace/_pages/WorkspaceServicesPag
 import { WorkspacePortalProvider } from './contexts/WorkspacePortalContext';
 import WorkspaceRegister from './pages/workspace/_pages/_auth/WorkspaceRegister';
 import RequireWorkspace from './contexts/RequireWorkspace';
-import WorkspaceService from "./Pages/workspace-service/pages/workspace-service";
+import WorkspaceDiscountsPage from './pages/workspace/_pages/WorkspaceDiscountsPage';
+import WorkspaceProfile from './pages/workspace/_pages/WorkspaceProfile';
+import UserHome from './pages/main/_pages/UserHome';
+import RewardsPage from './pages/main/_pages/RewardsPage';
+import UserProfilePage from './pages/main/_pages/UserProfilePage';
+import WorkspaceServicePage from './pages/main/_pages/services/SpaceServicePage';
+import WorkspaceCashtokenTransactions from "./pages/workspace/_pages/WorkspaceCashtokenTransactions";
+import WorkspaceTransactionsPage from "./pages/workspace/_pages/WorkspaceTransactionsPage";
+import UserBookingHistory from './pages/main/_pages/history/UserBookingHistory';
+import RequireUser from "./contexts/RequireUser";
+import SpaceServicePage from "./pages/main/_pages/services/SpaceServicePage";
+import WorkspaceBookingsPage from "./pages/workspace/_pages/WorkspaceBookingsPage";
+import UserTransactionsPage from "./pages/main/_pages/UserTransactionsPage";
+// import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -28,10 +42,17 @@ function App() {
         <WorkspaceProvider>
           <WorkspacePortalProvider>
             <Router>
+              <Toaster 
+                position="top-right"
+                richColors
+                closeButton
+                duration={4000}
+              />
               <Routes>
-                {/* Public Routea */}
-                <Route path="/" element={<LandingPage />} />
-
+                {/* Public Routes */}
+                <Route path="/" element={<RedirectIfAuth><LandingPage /></RedirectIfAuth>} />
+                {/* <Route path="*" element={<NotFound />} /> */}
+                
                 {/* Auth Routes */}
                 <Route
                   path="/register"
@@ -58,6 +79,57 @@ function App() {
                   }
                 />
 
+                {/* User Routes */}
+                <Route
+                  path="/user-home"
+                  element={
+                    <RequireUser>
+                      <UserHome />
+                    </RequireUser>
+                  }
+                />
+                <Route
+                  path="/rewards"
+                  element={
+                    <RequireUser>
+                      <RewardsPage />
+                    </RequireUser>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <RequireUser>
+                      <UserProfilePage />
+                    </RequireUser>
+                  }
+                />
+                <Route
+                  path="/space/service"
+                  element={
+                    // <RequireUser>
+                      <SpaceServicePage />
+                    // </RequireUser>
+                  }
+                />
+                 <Route
+                  path="/space/transactions"
+                  element={
+                    // <RequireUser>
+                      <UserTransactionsPage />
+                    // </RequireUser>
+                  }
+                />
+                <Route
+                  path="/space/history"
+                  element={
+                    // <RequireUser>
+                      <UserBookingHistory />
+                    // </RequireUser>
+                  }
+                />
+
+
                 {/* Workspace Portal Routes */}
                 <Route path="/workspace/login" element={<WorkspaceLogin />} />
                 <Route path="/workspace/register" element={<WorkspaceRegister />} />
@@ -70,10 +142,50 @@ function App() {
                   }
                 />
                 <Route
+                  path="/workspace/discounts"
+                  element={
+                    <RequireWorkspace>
+                      <WorkspaceDiscountsPage />
+                    </RequireWorkspace>
+                  }
+                />
+                 <Route
                   path="/workspace/services"
                   element={
                     <RequireWorkspace>
                       <WorkspaceServicesPage />
+                    </RequireWorkspace>
+                  }
+                />
+                <Route
+                  path="/workspace/profile"
+                  element={
+                    <RequireWorkspace>
+                      <WorkspaceProfile />
+                    </RequireWorkspace>
+                  }
+                />
+                <Route
+                  path="/workspace/cashtoken-transactions"
+                  element={
+                    <RequireWorkspace>
+                      <WorkspaceCashtokenTransactions />
+                    </RequireWorkspace>
+                  }
+                />
+                <Route
+                  path="/workspace/transactions"
+                  element={
+                    <RequireWorkspace>
+                      <WorkspaceTransactionsPage />
+                    </RequireWorkspace>
+                  }
+                />
+                 <Route
+                  path="/workspace/bookings"
+                  element={
+                    <RequireWorkspace>
+                      <WorkspaceBookingsPage />
                     </RequireWorkspace>
                   }
                 />
@@ -98,12 +210,6 @@ function App() {
                         <WorkspaceManagement />
                       </RequireAdmin>
                     </RequireAuth>
-                  }
-                />
-                <Route
-                  path="/workspace-service"
-                  element={
-                      <WorkspaceService />
                   }
                 />
               </Routes>

@@ -20,7 +20,15 @@ const WorkspaceLogin: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9FAFB]">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+      <form onSubmit={handleSubmit} className="bg-white p-4 sm:p-8 rounded-xl shadow-md w-full max-w-md">
+        <div className="flex justify-center mb-4">
+          <img
+            src="/unispace_logo.svg"
+            alt="Unispace Logo"
+            className="h-12 sm:h-16 w-auto"
+            style={{ maxWidth: '180px' }}
+          />
+        </div>
         <h2 className="text-2xl font-bold mb-6 text-center text-[#1D3A8A]">Workspace Login</h2>
         <input type="email" className="border rounded px-4 py-2 mb-3 w-full" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required />
         <input type="password" className="border rounded px-4 py-2 mb-3 w-full" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required />

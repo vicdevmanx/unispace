@@ -8,8 +8,14 @@ interface RedirectIfAuthProps {
 
 const RedirectIfAuth: React.FC<RedirectIfAuthProps> = ({ children }) => {
   const { user, loading } = useAuthContext();
-  if (loading) return <div className='h-screen flex justify-center items-center'>Loading...</div>;
-  if (user) return <Navigate to="/" replace />;
+  // console.log('RedirectIfAuth user:', user);
+  if (loading) return <div className='h-screen flex justify-center items-center'>RedirectIfAuth Loading...</div>;
+  if (user) {
+    if (user.userType === 'normal') return <Navigate to="/user-home" replace />;
+    if (user.userType === 'workspace') return <Navigate to="/workspace/dashboard" replace />;
+    if (user.userType === 'admin') return <Navigate to="/admin/dashboard" replace />;
+    return <Navigate to="/" replace />;
+  }
   return <>{children}</>;
 };
 

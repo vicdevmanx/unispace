@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import WorkspaceLayout from '../_components/WorkspaceLayout';
 import { Service } from '../../../types/Workspace';
 import { useWorkspaceServices } from '../../../hooks/useWorkspaceServices';
 import { useWorkspacePortalContext } from '../../../contexts/WorkspacePortalContext';
+import ServiceDialog from './ServiceDialog';
+import { Eye, Trash2 } from 'lucide-react';
+import WorkspaceServiceViewDialog from '../_components/WorkspaceServiceViewDialog';
 
 const initialForm: Partial<Service> = {
   name: '',
@@ -29,6 +33,10 @@ const WorkspaceServicesPage = () => {
   const [form, setForm] = useState<Partial<Service>>(initialForm);
   const [imageFiles, setImageFiles] = useState<(File | string)[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [viewDialogOpen, setViewDialogOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [serviceToDelete, setServiceToDelete] = useState<Service | null>(null);
 
   const {
     services,
@@ -43,6 +51,13 @@ const WorkspaceServicesPage = () => {
     listServices();
     // eslint-disable-next-line
   }, []);
+
+  // Show error toast when there's an error
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -73,15 +88,39 @@ const WorkspaceServicesPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
     await createService({ ...form, images: imageFiles });
     setForm(initialForm);
     setImageFiles([]);
     setImagePreviews([]);
     setShowDialog(false);
+      toast.success('Service created successfully!');
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to create service');
+    }
   };
 
-  const handleDelete = async (id: string) => {
-    await deleteService(id);
+  const handleDeleteClick = (service: Service) => {
+    setServiceToDelete(service);
+    setConfirmDeleteOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (serviceToDelete) {
+      try {
+        await deleteService(serviceToDelete.id);
+        setServiceToDelete(null);
+        setConfirmDeleteOpen(false);
+        toast.success('Service deleted successfully!');
+      } catch (err: any) {
+        toast.error(err.message || 'Failed to delete service');
+      }
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setServiceToDelete(null);
+    setConfirmDeleteOpen(false);
   };
 
   return (
@@ -97,7 +136,6 @@ const WorkspaceServicesPage = () => {
         </div>
         <div className="bg-white rounded-xl shadow p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">All Services</h2>
-          {error && <div className="text-red-500 mb-2">{error}</div>}
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -135,7 +173,19 @@ const WorkspaceServicesPage = () => {
                         <td>₦{service.minCharge}</td>
                         <td>₦{service.maxCharge}</td>
                         <td>
-                          <button className="text-red-500 hover:underline" onClick={() => handleDelete(service.id)} disabled={loading}>Delete</button>
+                          <button
+                            className="text-blue-600 hover:text-blue-800 mr-2"
+                            onClick={() => {
+                              setSelectedService(service);
+                              setViewDialogOpen(true);
+                            }}
+                            title="View"
+                          >
+                            <Eye size={18} />
+                          </button>
+                          <button className="text-red-500 hover:text-red-700" onClick={() => handleDeleteClick(service)} disabled={loading} title="Delete">
+                            <Trash2 size={18} />
+                          </button>
                         </td>
                       </tr>
                     ))
@@ -147,52 +197,41 @@ const WorkspaceServicesPage = () => {
         </div>
         {/* Add New Service Dialog */}
         {showDialog && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-            <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-2xl relative">
-              <button
-                className="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl"
-                onClick={() => setShowDialog(false)}
-                aria-label="Close"
-              >
-                &times;
-              </button>
-              <h2 className="text-xl font-bold mb-4 text-[#1D3A8A]">Add New Service</h2>
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-                <input name="name" value={form.name} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Service Name" required />
-                <input name="type" value={form.type} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Type (room, seat, etc.)" required />
-                <input name="address" value={form.address} onChange={handleChange} className="border rounded px-4 py-2 md:col-span-2" placeholder="Address" required />
-                <input name="geoAddress" value={form.geoAddress} onChange={handleChange} className="border rounded px-4 py-2 md:col-span-2" placeholder="Geo Address (Google Maps link)" />
-                <input name="capacity" value={form.capacity} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Capacity" type="number" min={1} required />
-                <input name="contactLine" value={form.contactLine} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Contact Line" required />
-                <input name="minDuration" value={form.minDuration} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Min Duration (min)" type="number" min={1} required />
-                <input name="maxDuration" value={form.maxDuration} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Max Duration (min)" type="number" min={1} required />
-                <input name="minCharge" value={form.minCharge} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Min Charge (₦)" type="number" min={0} required />
-                <input name="maxCharge" value={form.maxCharge} onChange={handleChange} className="border rounded px-4 py-2" placeholder="Max Charge (₦)" type="number" min={0} required />
-                <input name="workingDays" value={form.workingDays} onChange={handleChange} className="border rounded px-4 py-2 md:col-span-2" placeholder="Working Days (comma separated)" />
-                <div className="flex gap-2">
-                  <input name="workingTime.start" value={form.workingTime?.start || ''} onChange={e => handleWorkingTimeChange('start', e.target.value)} className="border rounded px-4 py-2" placeholder="Start Time (e.g. 08:00)" type="time" />
-                  <input name="workingTime.end" value={form.workingTime?.end || ''} onChange={e => handleWorkingTimeChange('end', e.target.value)} className="border rounded px-4 py-2" placeholder="End Time (e.g. 18:00)" type="time" />
-                </div>
-                <input name="features" value={form.features} onChange={handleChange} className="border rounded px-4 py-2 md:col-span-2" placeholder="Features (comma separated)" />
-                <textarea name="description" value={form.description} onChange={handleChange} className="border rounded px-4 py-2 md:col-span-2" placeholder="Description" />
-                <div className="md:col-span-2">
-                  <label className="block mb-1 font-medium">Images</label>
-                  <input type="file" accept="image/*" multiple onChange={handleImageChange} />
-                  <div className="flex gap-2 mt-2 flex-wrap">
-                    {imagePreviews.map((src, idx) => (
-                      <img key={idx} src={src} alt="Preview" className="w-16 h-16 object-cover rounded border" />
-                    ))}
-                  </div>
-                </div>
-                <div className="md:col-span-2 flex justify-end">
-                  <button type="button" className="bg-gray-200 text-[#1D3A8A] font-semibold py-2 px-4 rounded mr-2" onClick={() => setShowDialog(false)}>
-                    Cancel
-                  </button>
-                  <button type="submit" className="bg-[#1D3A8A] text-white font-semibold py-2 px-4 rounded" disabled={loading}>
-                    {loading ? 'Saving...' : 'Save Service'}
-                  </button>
-                </div>
-              </form>
+          <ServiceDialog
+            open={showDialog}
+            onClose={() => setShowDialog(false)}
+            onSubmit={async (serviceData) => {
+              await createService(serviceData);
+              setShowDialog(false);
+              listServices();
+            }}
+          />
+        )}
+        <WorkspaceServiceViewDialog
+          open={viewDialogOpen}
+          onClose={() => setViewDialogOpen(false)}
+          service={selectedService}
+        />
+        {confirmDeleteOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 px-2">
+            <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm relative flex flex-col items-center">
+              <h3 className="text-lg font-bold mb-4 text-[#1D3A8A]">Confirm Delete</h3>
+              <p className="mb-6 text-center">Are you sure you want to delete <span className="font-semibold">{serviceToDelete?.name}</span>?</p>
+              <div className="flex gap-4">
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  onClick={handleConfirmDelete}
+                  disabled={loading}
+                >
+                  Yes, Delete
+                </button>
+                <button
+                  className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300"
+                  onClick={handleCancelDelete}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { useWorkspacePortal } from '@/hooks/useWorkspacePortal';
+import { useWorkspacePortal } from '../hooks/useWorkspacePortal';
 
 const WorkspacePortalContext = createContext<any>(undefined);
 

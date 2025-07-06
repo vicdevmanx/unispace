@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import { toast } from 'sonner';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login, loading, error } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const user = await login(email, password);
+    if (user) {
+      toast.success('Login successful!');
+      navigate('/user-home');
+    } else {
+      toast.error(error || 'Login failed. Please check your credentials.');
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-stretch bg-[#F9FAFB]">
@@ -89,7 +106,7 @@ const Login = () => {
         <div className="w-full shadow rounded-[10px]  max-w-md mx-auto p-8">
           <h2 className="text-3xl font-bold text-[#1D3A8A] text-center mb-2">Log In</h2>
           <p className="text-center text-[#6B7280] mb-8">Enter your credentials to access your account</p>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="block mb-1 font-medium">Email Address</label>
               <div className="relative">
@@ -98,6 +115,9 @@ const Login = () => {
                   type="email"
                   className="w-full border rounded px-10 py-3 focus:outline-none focus:ring-2 focus:ring-[#3B0CA8]"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -109,6 +129,9 @@ const Login = () => {
                   type={showPassword ? 'text' : 'password'}
                   className="w-full border rounded px-10 py-3 focus:outline-none focus:ring-2 focus:ring-[#3B0CA8]"
                   placeholder="Enter your password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
                 />
                 <button
                   type="button"
@@ -135,19 +158,22 @@ const Login = () => {
                 <input type="checkbox" className="accent-[#3B0CA8]" />
                 <span className="text-sm">Remember me</span>
               </label>
-              <a href="#" className="text-[#6C2BD7] text-sm font-medium hover:underline">Forgot password?</a>
+              <Link to="/forgot-password" className="text-[#6C2BD7] text-sm font-medium hover:underline">
+                Forgot password?
+              </Link>
             </div>
             <button
               type="submit"
               className="w-full bg-[#1D3A8A] text-white font-semibold py-3 rounded-[10px] text-lg hover:opacity-80 transition"
+              disabled={loading}
             >
-              Log In
+              {loading ? 'Logging in...' : 'Log In'}
             </button>
           </form>
          
           <p className="text-center text-sm mt-4 text-[#6B7280]">
             Don't have an account?{' '}
-            <a href="#" className="text-[#6C2BD7] font-medium hover:underline">Sign up</a>
+            <Link to="/register" className="text-[#6C2BD7] font-medium hover:underline">Sign up</Link>
           </p>
         </div>
         
