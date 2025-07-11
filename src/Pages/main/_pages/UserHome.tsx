@@ -66,7 +66,8 @@ const UserHome = () => {
     );
   }
 
-  const isProfileComplete = user.firstname && user.lastname && user.phoneNumber && user.occupation && user.bio && user.photoURL;
+  const isProfileComplete = user.firstname && user.lastname && user.phoneNumber && user.occupation && user.bio;
+  // && user.photoURL
 
   return (
     <UserLayout>
