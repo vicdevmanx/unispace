@@ -248,9 +248,9 @@ const ServiceDetailsBottomSheet: React.FC<ServiceDetailsBottomSheetProps> = ({
                 Working Hours
               </h3>
               <div className="space-y-3">
-                <div className="flex justify-between items-center">
+                <div className="flex justify-items-end ">
                   <span className="text-gray-600">Days</span>
-                  <span className="font-medium">
+                  <span className="font-medium grid grid-cols-2 gap-2 justify-items-start ml- ">
                     {service.workingDays?.join(", ")}
                   </span>
                 </div>
