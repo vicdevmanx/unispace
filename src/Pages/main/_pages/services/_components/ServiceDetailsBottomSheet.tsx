@@ -112,7 +112,6 @@ const ServiceDetailsBottomSheet: React.FC<ServiceDetailsBottomSheetProps> = ({
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
-       
         style={{
           transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
           transition: dragY === 0 ? "transform 0.2s ease-out" : undefined,
@@ -248,11 +247,18 @@ const ServiceDetailsBottomSheet: React.FC<ServiceDetailsBottomSheetProps> = ({
                 Working Hours
               </h3>
               <div className="space-y-3">
-                <div className="flex justify-items-end ">
-                  <span className="text-gray-600">Days</span>
-                  <span className="font-medium grid grid-cols-2 gap-2 justify-items-start ml- ">
-                    {service.workingDays?.join(", ")}
-                  </span>
+                <div className="flex justify-between gap-2">
+                  <span className="text-gray-600 mb-2">Days</span>
+                  <div className="flex flex-wrap gap-1 sm:gap-2 md:gap-3">
+                    {service.workingDays?.map((day, index) => (
+                      <span
+                        key={index}
+                        className="bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-sm sm:text-base"
+                      >
+                        {day}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Hours</span>
