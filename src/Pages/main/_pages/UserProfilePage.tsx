@@ -92,6 +92,32 @@ const UserProfilePage = () => {
     }
   };
 
+  const handleCancel = () => {
+     setIsEditing(false);
+    // ✅ Reset form back to original user data
+    setForm({
+      firstname: user.firstname || '',
+      lastname: user.lastname || '',
+      email: user.email || '',
+      phoneNumber: user.phoneNumber || '',
+      occupation: user.occupation || '',
+      bio: user.bio || '',
+      photoURL: user.photoURL || '',
+    });
+    setSelectedImage(null); // ✅ Also clear image if changed setIsEditing(false);
+    // ✅ Reset form back to original user data
+    setForm({
+      firstname: user.firstname || '',
+      lastname: user.lastname || '',
+      email: user.email || '',
+      phoneNumber: user.phoneNumber || '',
+      occupation: user.occupation || '',
+      bio: user.bio || '',
+      photoURL: user.photoURL || '',
+    });
+    setSelectedImage(null); // ✅ Also clear image if changed
+  }
+
   const getInitials = (firstname = '', lastname = '') => {
     return (firstname[0] || '').toUpperCase() + (lastname[0] || '').toUpperCase();
   };
@@ -175,7 +201,13 @@ const UserProfilePage = () => {
               {isEditing ? (
                 <>
                   <Save className="h-4 w-4" />
-                  <span>Save Changes</span>
+                 <button
+                onClick={handleSave}
+                className=" bg-[#1D3A8A] text-white rounded-lg hover:bg-[#214cc3] transition w-full sm:w-auto"
+                disabled={uploading}
+              >
+                {uploading ? 'Saving...' : 'Save Changes'}
+              </button>
                 </>
               ) : (
                 <>
@@ -286,7 +318,7 @@ const UserProfilePage = () => {
           {isEditing && (
             <div className="mt-6 flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-3">
               <button
-                onClick={() => setIsEditing(false)}
+                onClick={handleCancel}
                 className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition w-full sm:w-auto"
                 disabled={uploading}
               >

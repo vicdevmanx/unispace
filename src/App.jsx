@@ -24,7 +24,7 @@ import WorkspaceDiscountsPage from './pages/workspace/_pages/WorkspaceDiscountsP
 import WorkspaceProfile from './pages/workspace/_pages/WorkspaceProfile';
 import UserHome from './pages/main/_pages/UserHome';
 import RewardsPage from './pages/main/_pages/RewardsPage';
-import UserProfilePage from './pages/main/_pages/UserProfilePage';
+import UserProfilePage from './Pages/main/_pages/UserProfilePage';
 import WorkspaceServicePage from './pages/main/_pages/services/SpaceServicePage';
 import WorkspaceCashtokenTransactions from "./pages/workspace/_pages/WorkspaceCashtokenTransactions";
 import WorkspaceTransactionsPage from "./pages/workspace/_pages/WorkspaceTransactionsPage";
