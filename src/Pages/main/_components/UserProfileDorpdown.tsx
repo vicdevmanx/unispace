@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 
 const getInitials = (firstname = '', lastname = '') => {
-  return (
-    (firstname[0] || '').toUpperCase() + (lastname[0] || '').toUpperCase()
-  );
+  return (firstname[0] || '').toUpperCase() + (lastname[0] || '').toUpperCase();
 };
 
 const UserProfileDropdown = () => {
@@ -35,11 +33,24 @@ const UserProfileDropdown = () => {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1D3A8A] text-white font-bold text-lg focus:outline-none"
+        className="flex items-center justify-center w-10 h-10 rounded-full focus:outline-none"
         onClick={() => setOpen((prev) => !prev)}
         aria-label="User profile menu"
+        style={{ backgroundColor: user.photoURL ? 'transparent' : '#1D3A8A', color: user.photoURL ? 'inherit' : '#FFFFFF' }}
       >
-        {getInitials(user.firstname, user.lastname)}
+        {user.photoURL ? (
+          <img
+            src={user.photoURL}
+            alt="User profile"
+            className="w-10 h-10 rounded-full object-cover"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none'; // Hide on error
+              (e.target as HTMLImageElement).nextSibling?.remove(); // Remove fallback if present
+            }}
+          />
+        ) : (
+          <span className="font-bold text-lg">{getInitials(user.firstname, user.lastname)}</span>
+        )}
       </button>
       {open && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
