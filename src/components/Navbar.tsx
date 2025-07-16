@@ -6,7 +6,7 @@ import UserProfileDropdown from '../pages/main/_components/UserProfileDorpdown';
 
 // Skeleton loader component
 const NavbarSkeleton = () => (
-  <nav className="fixed max-w-7xl top-4 left-1/2 transform -translate-x-1/2 z-50 rounded-2xl border border-gray-200/50 w-[calc(100%-2rem)]">
+  <nav className="fixed max-w-7xl top-4 left-1/2 transform -translate-x-1/2 z-50 rounded-2xl border border-gray-200/50 w-[calc(100%-2rem)] md:w-[calc(100%-4rem)]">
     <div className="px-6 py-3">
       <div className="flex items-center justify-between animate-pulse">
         <div className="h-6 w-32 bg-gray-200 rounded" />
@@ -279,52 +279,52 @@ const Navbar = () => {
           isScrolled 
             ? 'bg-white/95 backdrop-blur-md shadow-lg'
             : 'bg-white/90 backdrop-blur-sm shadow-md'
-        } rounded-2xl border border-gray-200/50`}
+        } rounded-2xl border border-gray-200/50 md:w-[calc(100%-4rem)] w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)]`}
         style={{
-          width: 'calc(100% - 2rem)',
+          width: 'calc(100% - 2rem)', // Default width, overridden by responsive classes
         }}
       >
-        <div className="px-6 py-3">
+        <div className="px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="/" className="flex items-center space-x-2">
-              <img src="/unispace_logo.svg" alt="unispace_logo" className="w-auto h-6" />
+              <img src="/unispace_logo.svg" alt="unispace_logo" className="w-auto h-6 sm:h-8" />
             </a>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-6 sm:space-x-8">
               {navLinks.map((link, index) => renderNavLink(link, index))}
             </div>
 
             {/* Desktop Auth Buttons / User Profile */}
-            <div className="hidden lg:flex items-center space-x-3">
+            <div className="hidden lg:flex items-center space-x-2 sm:space-x-3">
               {user ? (
                 <UserProfileDropdown />
               ) : (
                 <>
-              <Link to="/login">
-              <button
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 rounded-lg"
-                style={{
-                  fontFamily: 'Poppins, sans-serif',
-                  fontSize: '1rem'
-                }}
-              >
-                Login
-              </button>
-              </Link>
-              <Link to="/register">
-              <button
-                className="px-6 py-2 text-white font-medium rounded-lg transition-all duration-200 hover:opacity-80 shadow-sm"
-                style={{
-                  fontFamily: 'Poppins, sans-serif',
-                  fontSize: '1rem',
-                  backgroundColor: '#1D3A8A'
-                }}
-              >
-                Register
-              </button>
-              </Link>
+                  <Link to="/login">
+                    <button
+                      className="px-3 sm:px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 rounded-lg text-sm sm:text-base"
+                      style={{
+                        fontFamily: 'Poppins, sans-serif',
+                        fontSize: '1rem'
+                      }}
+                    >
+                      Login
+                    </button>
+                  </Link>
+                  <Link to="/register">
+                    <button
+                      className="px-3 sm:px-6 py-2 text-white font-medium rounded-lg transition-all duration-200 hover:opacity-80 shadow-sm text-sm sm:text-base"
+                      style={{
+                        fontFamily: 'Poppins, sans-serif',
+                        fontSize: '1rem',
+                        backgroundColor: '#1D3A8A'
+                      }}
+                    >
+                      Register
+                    </button>
+                  </Link>
                 </>
               )}
             </div>
@@ -347,9 +347,9 @@ const Navbar = () => {
       {/* Full Screen Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-white">
-          <div className="flex flex-col justify-between px-8 py-10">
+          <div className="flex flex-col h-full justify-between px-4 sm:px-6 py-6">
             {/* Navigation Links */}
-            <div className="flex flex-col space-y-4 mt-16">
+            <div className="flex flex-col space-y-4 mt-12 sm:mt-16">
               {navLinks.map((link, index) => {
                 // Handle Home link for all authenticated users
                 if (user && link === 'Home') {
@@ -357,10 +357,9 @@ const Navbar = () => {
                     <a
                       key={index}
                       href="/user-home"
-                      className="text-gray-700 hover:text-[#214cc3] transition-colors duration-300 font-medium"
+                      className="text-gray-700 hover:text-[#214cc3] transition-colors duration-300 font-medium text-lg sm:text-xl"
                       style={{
                         fontFamily: 'Poppins, sans-serif',
-                        fontSize: '48px',
                         lineHeight: '1.2'
                       }}
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -375,10 +374,9 @@ const Navbar = () => {
                   return (
                     <div key={index} className="space-y-2">
                       <div
-                        className="text-gray-700 font-medium cursor-pointer"
+                        className="text-gray-700 font-medium cursor-pointer text-lg sm:text-xl"
                         style={{
                           fontFamily: 'Poppins, sans-serif',
-                          fontSize: '48px',
                           lineHeight: '1.2'
                         }}
                         onClick={() => setWorkspaceDropdownOpen(!workspaceDropdownOpen)}
@@ -386,13 +384,12 @@ const Navbar = () => {
                         {link}
                       </div>
                       {workspaceDropdownOpen && (
-                        <div className="ml-8 space-y-2">
+                        <div className="ml-4 sm:ml-8 space-y-2">
                           <a
                             href="/space/service"
-                            className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300"
+                            className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300 text-sm sm:text-base"
                             style={{
                               fontFamily: 'Poppins, sans-serif',
-                              fontSize: '24px',
                               lineHeight: '1.2'
                             }}
                             onClick={() => setIsMobileMenuOpen(false)}
@@ -400,23 +397,21 @@ const Navbar = () => {
                             Services
                           </a>
                           <a
-                href="/space/transactions"
-                className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300"
+                            href="/space/transactions"
+                            className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300 text-sm sm:text-base"
                             style={{
                               fontFamily: 'Poppins, sans-serif',
-                              fontSize: '24px',
                               lineHeight: '1.2'
                             }}
                             onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Transactions
-              </a>
+                          >
+                            Transactions
+                          </a>
                           <a
                             href="/space/history"
-                            className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300"
+                            className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300 text-sm sm:text-base"
                             style={{
                               fontFamily: 'Poppins, sans-serif',
-                              fontSize: '24px',
                               lineHeight: '1.2'
                             }}
                             onClick={() => setIsMobileMenuOpen(false)}
@@ -434,10 +429,9 @@ const Navbar = () => {
                 //   return (
                 //     <div key={index} className="space-y-2">
                 //       <div
-                //         className="text-gray-700 font-medium cursor-pointer"
+                //         className="text-gray-700 font-medium cursor-pointer text-lg sm:text-xl"
                 //         style={{
                 //           fontFamily: 'Poppins, sans-serif',
-                //           fontSize: '48px',
                 //           lineHeight: '1.2'
                 //         }}
                 //         onClick={() => setCommunitiesDropdownOpen(!communitiesDropdownOpen)}
@@ -445,13 +439,12 @@ const Navbar = () => {
                 //         {link}
                 //       </div>
                 //       {communitiesDropdownOpen && (
-                //         <div className="ml-8 space-y-2">
+                //         <div className="ml-4 sm:ml-8 space-y-2">
                 //           <a
                 //             href="/communities/my-communities"
-                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300"
+                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300 text-sm sm:text-base"
                 //             style={{
                 //               fontFamily: 'Poppins, sans-serif',
-                //               fontSize: '24px',
                 //               lineHeight: '1.2'
                 //             }}
                 //             onClick={() => setIsMobileMenuOpen(false)}
@@ -460,10 +453,9 @@ const Navbar = () => {
                 //           </a>
                 //           <a
                 //             href="/communities/join"
-                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300"
+                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300 text-sm sm:text-base"
                 //             style={{
                 //               fontFamily: 'Poppins, sans-serif',
-                //               fontSize: '24px',
                 //               lineHeight: '1.2'
                 //             }}
                 //             onClick={() => setIsMobileMenuOpen(false)}
@@ -481,10 +473,9 @@ const Navbar = () => {
                 //   return (
                 //     <div key={index} className="space-y-2">
                 //       <div
-                //         className="text-gray-700 font-medium cursor-pointer"
+                //         className="text-gray-700 font-medium cursor-pointer text-lg sm:text-xl"
                 //         style={{
                 //           fontFamily: 'Poppins, sans-serif',
-                //           fontSize: '48px',
                 //           lineHeight: '1.2'
                 //         }}
                 //         onClick={() => setRewardsDropdownOpen(!rewardsDropdownOpen)}
@@ -492,13 +483,12 @@ const Navbar = () => {
                 //         {link}
                 //       </div>
                 //       {rewardsDropdownOpen && (
-                //         <div className="ml-8 space-y-2">
+                //         <div className="ml-4 sm:ml-8 space-y-2">
                 //           <a
                 //             href="/rewards"
-                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300"
+                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300 text-sm sm:text-base"
                 //             style={{
                 //               fontFamily: 'Poppins, sans-serif',
-                //               fontSize: '24px',
                 //               lineHeight: '1.2'
                 //             }}
                 //             onClick={() => setIsMobileMenuOpen(false)}
@@ -507,10 +497,9 @@ const Navbar = () => {
                 //           </a>
                 //           <a
                 //             href="/rewards/streak"
-                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300"
+                //             className="block text-gray-600 hover:text-[#214cc3] transition-colors duration-300 text-sm sm:text-base"
                 //             style={{
                 //               fontFamily: 'Poppins, sans-serif',
-                //               fontSize: '24px',
                 //               lineHeight: '1.2'
                 //             }}
                 //             onClick={() => setIsMobileMenuOpen(false)}
@@ -525,25 +514,24 @@ const Navbar = () => {
 
                 // Default case for public links
                 return (
-                <a
-                  key={index}
-                  href={`#${link.toLowerCase()}`}
-                  className="text-gray-700 hover:text-[#214cc3] transition-colors duration-300 font-medium"
-                  style={{
-                    fontFamily: 'Poppins, sans-serif',
-                    fontSize: '48px',
-                    lineHeight: '1.2'
-                  }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link}
-                </a>
+                  <a
+                    key={index}
+                    href={`#${link.toLowerCase()}`}
+                    className="text-gray-700 hover:text-[#214cc3] transition-colors duration-300 font-medium text-lg sm:text-xl"
+                    style={{
+                      fontFamily: 'Poppins, sans-serif',
+                      lineHeight: '1.2'
+                    }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link}
+                  </a>
                 );
               })}
             </div>
 
             {/* Auth Buttons at Bottom */}
-            <div className="flex flex-row space-x-4 pb-2 mt-8">
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pb-4 sm:pb-2 mt-12 sm:mt-20">
               {user ? (
                 <div className="w-full flex">
                   <UserProfileDropdown />
@@ -551,29 +539,27 @@ const Navbar = () => {
               ) : (
                 <>
                   <Link to="/login" className="w-full">
-              <button
-                className="w-full px-6 py-4 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 rounded-lg border border-gray-300"
-                style={{
-                  fontFamily: 'Poppins, sans-serif',
-                  fontSize: '18px'
-                }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Login
-              </button>
+                    <button
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 rounded-lg border border-gray-300 text-base sm:text-lg"
+                      style={{
+                        fontFamily: 'Poppins, sans-serif'
+                      }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Login
+                    </button>
                   </Link>
                   <Link to="/register" className="w-full">
-              <button
-                className="w-full px-6 py-4 text-white font-medium rounded-lg transition-all duration-200 hover:opacity-80 shadow-sm"
-                style={{
-                  fontFamily: 'Poppins, sans-serif',
-                  fontSize: '18px',
-                  backgroundColor: '#1D3A8A'
-                }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Register
-              </button>
+                    <button
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 text-white font-medium rounded-lg transition-all duration-200 hover:opacity-80 shadow-sm text-base sm:text-lg"
+                      style={{
+                        fontFamily: 'Poppins, sans-serif',
+                        backgroundColor: '#1D3A8A'
+                      }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Register
+                    </button>
                   </Link>
                 </>
               )}
