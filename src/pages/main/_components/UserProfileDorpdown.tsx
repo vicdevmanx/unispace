@@ -46,7 +46,7 @@ const UserProfileDropdown = () => {
                   />
                 ) : (
                   <div className="flex items-center justify-center w-10 h-10 rounded-full text-white font-bold text-lg focus:outline-none">
-                    {getInitials(user.firstname, user.lastname)}
+        {getInitials(user.firstname, user.lastname)}
                   </div>
                 )}
       </button>
