@@ -347,7 +347,7 @@ const Navbar = () => {
       {/* Full Screen Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-white">
-          <div className="flex flex-col h-full justify-between px-8 py-10">
+          <div className="flex flex-col justify-between px-8 py-10">
             {/* Navigation Links */}
             <div className="flex flex-col space-y-4 mt-16">
               {navLinks.map((link, index) => {
@@ -543,9 +543,9 @@ const Navbar = () => {
             </div>
 
             {/* Auth Buttons at Bottom */}
-            <div className="flex flex-row space-x-4 pb-2 mt-20">
+            <div className="flex flex-row space-x-4 pb-2 mt-8">
               {user ? (
-                <div className="w-full flex justify-center">
+                <div className="w-full flex">
                   <UserProfileDropdown />
                 </div>
               ) : (
