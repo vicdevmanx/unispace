@@ -40,6 +40,8 @@ const UserProfileDropdown = () => {
         aria-label="User profile menu"
       >
         {getInitials(user.firstname, user.lastname)}
+                  </div>
+                )}
       </button>
       {open && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
