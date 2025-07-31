@@ -39,6 +39,14 @@ const UserProfileDropdown = () => {
         onClick={() => setOpen((prev) => !prev)}
         aria-label="User profile menu"
       >
+           {user.photoURL || user.photoURL ? (
+                  <img
+                    src={user.photoURL || user.photoURL}
+                    alt="Profile"
+                    className="w-10 h-10 rounded-full object-cover border-2 border-[#1D3A8A] bg-white"
+                  />
+                ) : (
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#1D3A8A] rounded-full flex items-center justify-center text-white text-xl sm:text-2xl font-bold">
         {getInitials(user.firstname, user.lastname)}
                   </div>
                 )}
