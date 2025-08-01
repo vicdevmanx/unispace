@@ -91,13 +91,13 @@ const SpaceServicePage = () => {
     <UserLayout>
       <div className="max-w-7xl mx-auto px-4">
       {/* Hero Section with Image Background */}
-      <section className="relative w-full max-w-7xl mx-auto h-80 mb-8 overflow-hidden rounded-2xl mt-10">
+      <section className="relative w-full max-w-7xl mx-auto py-8 mb-8 overflow-hidden rounded-2xl mt-10">
         <img
           src="/digital-art-style-illustration-graphic-designer.jpg"
           alt="Workspace Hero"
           className="absolute inset-0 w-full h-full object-cover object-center z-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1D3A8A] via-[#214cc3] to-[#1D3A8A] opacity-50 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1D3A8A] via-[#214cc3] to-[#1D3A8A] opacity-90 z-10"></div>
         
         <div className="relative z-30 flex flex-col items-center justify-center h-full text-center text-white px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
