@@ -264,7 +264,7 @@ const CurrentBookings: React.FC<CurrentBookingsProps> = ({ bookings, loading, on
             setPaymentMethod(null);
             setCheckInId(null);
             setCheckInLoading(false);
-            setTimeout(() => window.location.reload(), 1000);
+            // setTimeout(() => window.location.reload(), 1000);
           },
           onClose: () => {
             setPaystackError('Payment was cancelled.');
@@ -289,7 +289,7 @@ const CurrentBookings: React.FC<CurrentBookingsProps> = ({ bookings, loading, on
             setCashtokenGenLoading(false);
             setCashtokenStatus(null);
             setCheckInLoading(false);
-            setTimeout(() => window.location.reload(), 1000);
+            // setTimeout(() => window.location.reload(), 1000);
             return;
           }
           
@@ -320,7 +320,7 @@ const CurrentBookings: React.FC<CurrentBookingsProps> = ({ bookings, loading, on
           return;
         }
         setCheckInLoading(false);
-        setTimeout(() => window.location.reload(), 1000);
+        // setTimeout(() => window.location.reload(), 1000);
         return;
       }
     } catch (err: any) {
@@ -564,7 +564,7 @@ const CurrentBookings: React.FC<CurrentBookingsProps> = ({ bookings, loading, on
                       setCashtokenGenLoading(false);
                       setCashtokenStatus(null);
                       setCheckInLoading(false);
-                      setTimeout(() => window.location.reload(), 1000);
+                      // setTimeout(() => window.location.reload(), 1000);
                       return;
                     }
                     
@@ -595,7 +595,7 @@ const CurrentBookings: React.FC<CurrentBookingsProps> = ({ bookings, loading, on
                     return;
                   }
                   setCheckInLoading(false);
-                  setTimeout(() => window.location.reload(), 1000);
+                  // setTimeout(() => window.location.reload(), 1000);
                 }}
                 disabled={checkInLoading}
               >
@@ -1052,7 +1052,7 @@ const [cashtokenStatus, setCashtokenStatus] = React.useState<string | null>(null
                             setCashtokenGenerated(existingToken);
                             setCashtokenGenLoading(false);
                             setCashtokenStatus(null);
-                            setTimeout(() => window.location.reload(), 1000);
+                            // setTimeout(() => window.location.reload(), 1000);
                             return;
                           }
                           
