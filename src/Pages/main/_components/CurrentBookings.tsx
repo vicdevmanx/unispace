@@ -27,7 +27,19 @@ const statusColors: Record<string, string> = {
 };
 
 // Utility to calculate overtime charge based on durationUnit
-function getOvertimeCharge({ totalPrice, duration, durationUnit, secondsOvertime, fallbackUnitPrice }) {
+function getOvertimeCharge({
+  totalPrice,
+  duration,
+  durationUnit,
+  secondsOvertime,
+  fallbackUnitPrice,
+}: {
+  totalPrice: number;
+  duration: number;
+  durationUnit: string;
+  secondsOvertime: number;
+  fallbackUnitPrice?: number;
+}) {
   // Use fallbackUnitPrice if totalPrice is 0 (free booking)
   const perUnit = totalPrice > 0 ? totalPrice / duration : fallbackUnitPrice || 0;
   let overtimeUnits = 0;

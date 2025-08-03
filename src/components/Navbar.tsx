@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, Home, Briefcase, User, LogOut, Info, Contact, Users, FileText, Clock, CreditCard } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import UserProfileDropdown from "../pages/main/_components/UserProfileDorpdown";
+import UserProfileDropdown from "../Pages/main/_components/UserProfileDorpdown";
 
 // Skeleton loader component
 const NavbarSkeleton = () => (
@@ -69,7 +69,23 @@ const Navbar = () => {
     }, 300);
   };
 
-  const renderNavLink = (link, index) => {
+  interface NavLink {
+    name: string;
+    icon: React.ComponentType<{ size?: number }>;
+  }
+
+  interface SubNavLink {
+    name: string;
+    icon: React.ComponentType<{ size?: number }>;
+    path: string;
+  }
+
+  interface RenderNavLinkProps {
+    link: NavLink;
+    index: number;
+  }
+
+  const renderNavLink = (link: NavLink, index: number): React.ReactNode => {
     const Icon = link.icon;
 
     if (user && link.name === "Home") {
@@ -86,6 +102,11 @@ const Navbar = () => {
     }
 
     if (user && user.userType === "normal" && link.name === "Workspace") {
+      const subNavLinks: SubNavLink[] = [
+        { name: "Service", icon: Briefcase, path: "/space/service" },
+        { name: "Transactions", icon: CreditCard, path: "/space/transactions" },
+        { name: "History", icon: Clock, path: "/space/history" },
+      ];
       return (
         <div
           key={index}
@@ -103,11 +124,7 @@ const Navbar = () => {
           </button>
           {workspaceDropdownOpen && (
             <div className="absolute top-full left-0 mt-3 w-52 bg-white rounded-xl shadow-2xl py-3 border border-gray-100/50 backdrop-blur-sm animate-fade-in">
-              {[
-                { name: "Service", icon: Briefcase, path: "/space/service" },
-                { name: "Transactions", icon: CreditCard, path: "/space/transactions" },
-                { name: "History", icon: Clock, path: "/space/history" },
-              ].map((item, i) => {
+              {subNavLinks.map((item, i) => {
                 const SubIcon = item.icon;
                 return (
                   <a
