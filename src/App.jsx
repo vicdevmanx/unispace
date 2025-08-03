@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
-import LandingPage from "./pages/LandingPage";
+import LandingPages from "./pages/LandingPages";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -50,7 +50,7 @@ function App() {
               />
               <Routes>
                 {/* Public Routes */}
-                <Route path="/" element={<RedirectIfAuth><LandingPage /></RedirectIfAuth>} />
+                <Route path="/" element={<RedirectIfAuth><LandingPages /></RedirectIfAuth>} />
                 {/* <Route path="*" element={<NotFound />} /> */}
                 
                 {/* Auth Routes */}
