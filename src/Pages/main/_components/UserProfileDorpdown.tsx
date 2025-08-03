@@ -46,7 +46,7 @@ const UserProfileDropdown = () => {
                     className="w-10 h-10 rounded-full object-cover border-2 border-[#1D3A8A] bg-white"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-[#1D3A8A] rounded-full flex items-center justify-center text-white text-xl sm:text-2xl font-bold">
+                  <div className="w-10 h-10 bg-[#1D3A8A] rounded-full flex items-center justify-center text-white text-lg font-bold">
                     {getInitials(user.firstname, user.lastname)}
                   </div>
                 )}
