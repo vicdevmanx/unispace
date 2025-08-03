@@ -8,7 +8,7 @@ import { ContactUs } from '../components/ContactUs'
 import Footer from '../components/Footer'
 import { Toaster } from 'sonner' 
 
-const LandingPages = () => {
+const LandingPage = () => {
   return (
     <div className="bg-[#1D3A8A]/5">
       <Toaster position="top-right" richColors /> 
@@ -36,4 +36,4 @@ const LandingPages = () => {
   )
 }
 
-export default LandingPages
+export default LandingPage
